@@ -98,6 +98,7 @@ footer { font-size: 11px; }
 .pricing-table tbody .add-on { color: #a16b00; font-weight: 700; }
 .audit-button { font-size: 11px; gap: 5px; line-height: 1.3; min-height: 44px; padding: 10px 8px; }
 .pricing-note { align-items: flex-start; background: #f2f3f1; border-left: 4px solid var(--ink); display: flex; flex-wrap: wrap; font-size: 13px; font-style: normal; gap: 8px; line-height: 1.6; margin: 12px 0 70px; padding: 14px 16px; }
+.pricing-footnote { color: var(--muted); font-size: 12px; line-height: 1.55; margin: 12px 0 0; }
 .pricing-note .line-icon { flex: 0 0 auto; font-size: 14px; }
 .pricing-note span { color: var(--muted); }
 .addons-heading p { font-size: 14px; line-height: 1.6; max-width: 720px; }

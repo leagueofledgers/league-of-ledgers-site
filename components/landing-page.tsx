@@ -157,6 +157,7 @@ export default function LandingPage() {
             </tfoot>
           </table>
         </div>
+        <p className="pricing-footnote">* Job-costing coverage is subject to source-data quality, system capabilities, and agreed reporting scope.</p>
         <p className="pricing-note"><Mark type="check" /> Starting prices reflect transaction volume, account complexity, connected systems, reporting requirements, and the condition of your existing books. Final pricing is confirmed after an initial review. <span>·</span> No hourly billing.</p>
         <div className="addons">
           <div className="addons-heading"><h3>Optional services, scoped to your operation</h3><p>Not every shop needs these services every month. We’ll scope the right combination based on volume, systems, data quality, and the level of ownership you want to retain.</p></div>
