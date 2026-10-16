@@ -10,6 +10,12 @@ This block is written and re-added by `next dev` — verify at `node_modules/nex
 
 # Development history
 
+## 2026-10-16 — Tulsa HVAC cleanup case study
+
+The Case Studies section now presents the supplied Tulsa HVAC bookkeeping-cleanup story instead of the “In progress” placeholder. The write-up identifies League of Ledgers as the provider and summarizes the documented challenge, approach, and work completed. It uses aggregate figures from the supplied case-study file (including 229 statement items, $140K+ in supplier activity, and 61 missing invoices recorded) without adding new results or claims.
+
+To keep the public summary focused and protect client details, the section omits account numbers, vendor names, internal team references, and unfinished reconciliation amounts. It notes that the contractor’s name is withheld and distinguishes statement activity reviewed from unresolved follow-up items. The responsive card and metric layout is in `components/landing-page.tsx` and `app/globals.css`; section numbering now places Client Work before the final call to action. `git diff --check` passed, and a source scan found no internal team or brand references in the public component or stylesheet. The Vercel deployment result will be recorded after the push.
+
 ## 2026-10-16 — Career and case-studies navigation
 
 The primary navigation now includes a Career link that opens the Google Forms URL supplied by the site owner in a new tab, plus a Case Studies link that scrolls to an on-page placeholder. The placeholder is plainly marked “In progress” and contains no client claims or sample outcomes, so it can be replaced when approved case-study material is ready. The page remains a single-page site with anchor navigation.

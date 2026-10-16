@@ -230,9 +230,30 @@ export default function LandingPage() {
 
       <section className="software section-pad"><div className="section-kicker">05 / Fits your stack</div><h2>Already fluent in <em>your tools.</em></h2><p>Keep the systems you rely on. We make the numbers inside them work harder. Active connections and export-based reconciliation depend on your current setup and agreed scope.</p><div className="software-list">{software.map((item) => <span key={item}><Mark type="grid" /> {item}</span>)}</div></section>
 
-      <section className="case-studies section-pad" id="case-studies" aria-labelledby="case-studies-title"><div className="case-studies-panel"><span className="case-studies-status">In progress</span><div className="section-kicker">Case studies</div><h2 id="case-studies-title">Case Studies</h2><p>Case studies are in progress. Please check back for updates.</p></div></section>
+      <section className="case-studies section-pad" id="case-studies" aria-labelledby="case-studies-title">
+        <div className="case-studies-content">
+          <div className="section-kicker">06 / Client work</div>
+          <h2 id="case-studies-title">Case Studies</h2>
+          <article className="case-study-card">
+            <div className="case-study-meta"><span className="case-study-type">Bookkeeping cleanup</span><span>Tulsa, Oklahoma</span></div>
+            <h3>Vendor-record cleanup for an HVAC contractor</h3>
+            <p className="case-study-lede">League of Ledgers reviewed more than $140K in supplier activity in QuickBooks Online, addressing missing vendor bills, inconsistent coding, and stale open items for a residential and commercial HVAC contractor.</p>
+            <div className="case-study-stats" aria-label="Case study highlights">
+              <div><strong>$140K+</strong><span>supplier activity reviewed</span></div>
+              <div><strong>229</strong><span>statement items reviewed</span></div>
+              <div><strong>61</strong><span>missing invoices recorded</span></div>
+            </div>
+            <div className="case-study-details">
+              <div><h4>The challenge</h4><p>Vendor bills, open payables, and bank activity did not consistently match supplier statements. Some invoices were missing, while older bills remained open after payment and coding varied between entries.</p></div>
+              <div><h4>The approach</h4><p>League of Ledgers compared supplier statements with QuickBooks Online, documented the client’s chart of accounts, and set a consistent bill-entry format. Unclear charges and operational fixes were routed for client or office-admin follow-up.</p></div>
+              <div><h4>The work completed</h4><p>Recorded 61 invoices missing from QuickBooks, standardized 19 backlog bills and two vendor credits, and separated 43 invoices from a merged PDF for entry. A financing overpayment was recorded to receivables rather than revenue.</p></div>
+            </div>
+            <p className="case-study-note">The contractor’s name is withheld. Vendor names and account-level details are omitted; figures summarize records provided for this engagement.</p>
+          </article>
+        </div>
+      </section>
 
-      <section className="cta-section section-pad"><div className="cta-inner"><div className="section-kicker">06 / Your next clear move</div><h2>Ready to stop guessing?</h2><p>Bring us the messy books, the seasonal swings, and the big next step. We’ll bring clarity.</p><button type="button" className="button button-gold" onClick={openModal}>Book a Free Discovery Call <Mark type="arrow" /></button></div></section>
+      <section className="cta-section section-pad"><div className="cta-inner"><div className="section-kicker">07 / Your next clear move</div><h2>Ready to stop guessing?</h2><p>Bring us the messy books, the seasonal swings, and the big next step. We’ll bring clarity.</p><button type="button" className="button button-gold" onClick={openModal}>Book a Free Discovery Call <Mark type="arrow" /></button></div></section>
 
       <footer><a className="brand" href="#top"><img className="brand-logo" src="/league-of-ledgers-logo.jpg" alt="" aria-hidden="true" /><span>League of <b>Ledgers</b></span></a><span>© 2026 League of Ledgers</span><a href="mailto:marcus@leagueofledgers.com">marcus@leagueofledgers.com</a></footer>
 
