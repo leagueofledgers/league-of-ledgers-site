@@ -10,6 +10,10 @@ This block is written and re-added by `next dev` — verify at `node_modules/nex
 
 # Development history
 
+## 2026-10-16 — Whittier HVAC cleanup case study
+
+Added a second case to the existing Case Study section for an HVAC contractor in Whittier, California. The supplied draft labeled its amounts and counts illustrative, then the site owner confirmed they are verified and asked that the illustrative warning be disregarded. The public card therefore presents the January–June 2026 engagement as client work while withholding the contractor’s name. It describes the ServiceTitan and Housecall Pro reconciliation, the $1,318,000 reconciled revenue, the $22,500 difference from the pre-cleanup ledger, and the review of 63 mixed-use transactions totaling $24,860, including the amounts supported as business expense, identified as personal activity, and still pending documentation. It also records the 32 staff hours over three weeks. The shared section kicker remains “Client work”; spacing between cards is handled by a reusable adjacent-card rule in `app/globals.css`. This update affects `components/landing-page.tsx`, `app/globals.css`, and this history file. Source and deployment checks remain to be recorded after publication.
+
 ## 2026-10-16 — Case Study navigation label and order
 
 The top navigation now places the Case Study anchor before Career, matching the requested order, and uses the singular “Case Study” label in both the navigation and section heading. The Career link still opens the supplied application form in a new tab. This is a focused navigation/content-label adjustment in `components/landing-page.tsx`; the case-study content and section anchor remain unchanged.

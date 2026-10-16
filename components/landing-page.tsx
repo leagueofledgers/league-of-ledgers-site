@@ -250,6 +250,22 @@ export default function LandingPage() {
             </div>
             <p className="case-study-note">The contractor’s name is withheld. Vendor names and account-level details are omitted; figures summarize records provided for this engagement.</p>
           </article>
+          <article className="case-study-card" aria-labelledby="whittier-case-title">
+            <div className="case-study-meta"><span className="case-study-type">Bookkeeping cleanup</span><span>Whittier, California</span><span>January–June 2026</span></div>
+            <h3 id="whittier-case-title">Reconciling HVAC revenue across two field-service platforms</h3>
+            <p className="case-study-lede">League of Ledgers helped an HVAC contractor reconcile ServiceTitan and Housecall Pro revenue and review mixed personal and business spending. The work established a consistent, transaction-level method for comparing both systems with the accounting ledger.</p>
+            <div className="case-study-stats" aria-label="Case study highlights">
+              <div><strong>$1.318M</strong><span>reconciled revenue</span></div>
+              <div><strong>$22.5K</strong><span>net increase to ledger revenue</span></div>
+              <div><strong>63</strong><span>mixed-use transactions reviewed</span></div>
+            </div>
+            <div className="case-study-details">
+              <div><h4>The challenge</h4><p>Two differently configured platforms reported $1,371,000 in combined revenue, but shared invoices, credits, refunds, and report filters made the total unreliable. The books also included mixed-use charges that needed receipts and client review.</p></div>
+              <div><h4>The approach</h4><p>League of Ledgers applied one invoice-date basis net of credits and refunds, compared transaction-level exports from both systems with the ledger, and documented shared activity and report adjustments. Expense items were separated into supported business costs, personal activity for client-approved owner treatment, and items awaiting documentation.</p></div>
+              <div><h4>The result</h4><p>The reconciled revenue was $1,318,000, $53,000 below the raw CRM total and $22,500 above the pre-cleanup ledger. Of 63 mixed-use transactions totaling $24,860, $17,120 was supported as business expense, $4,580 was identified as personal activity, and $3,160 remained pending documentation or confirmation.</p></div>
+            </div>
+            <p className="case-study-note">The contractor’s name is withheld. Cleanup and reconciliation required 32 staff hours over three weeks.</p>
+          </article>
         </div>
       </section>
 

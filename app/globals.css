@@ -1088,6 +1088,10 @@ h2 em {
   padding: 34px;
 }
 
+.case-study-card + .case-study-card {
+  margin-top: 24px;
+}
+
 .case-study-meta {
   align-items: center;
   color: var(--muted);
