@@ -166,7 +166,7 @@ export default function LandingPage() {
       <section className="hero section-pad" id="top">
         <div className="hero-copy reveal-up">
           <div className="eyebrow"><span className="live-dot" /> Bookkeeping for HVAC, MEP &amp; Home-Service Contractors</div>
-          <h1>Numbers that <em>move</em> your business forward.</h1>
+          <h1>Bookkeeping that <em>moves</em> your business forward.</h1>
           <p className="hero-lede">Clear books. Better decisions. More room to focus on the work that built your business.</p>
           <div className="hero-actions">
             <button type="button" className="button button-dark" onClick={openModal}>Book a Free Discovery Call <Mark type="arrow" /></button>

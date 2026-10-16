@@ -10,6 +10,16 @@ This block is written and re-added by `next dev` — verify at `node_modules/nex
 
 # Development history
 
+## 2026-10-16 — Search metadata and crawler discovery
+
+The SEO source audit found that the single-page site had only a basic title and description, no canonical URL, no social sharing metadata, and no sitemap or robots file. Its home-page H1 was also brand-oriented without naming the bookkeeping service. The Vercel project confirms `leagueofledgers.com` permanently redirects to `www.leagueofledgers.com`, so the www host is now used consistently as the canonical domain.
+
+The root metadata now uses a descriptive bookkeeping title and page summary, a canonical homepage URL, Open Graph and large Twitter card details, and the existing brand artwork for browser and Apple icons. A generated 1200×630 Open Graph image uses the site's navy, gold, and orange palette. The hero H1 now identifies bookkeeping while retaining its existing “moves your business forward” message. The home page emits `WebSite` and `Organization` JSON-LD using only the public company name, contact email, site URL, and existing logo. No address, service area, social profiles, or other unverified business facts were added.
+
+Next.js `robots.ts` and `sitemap.ts` now expose the public site to crawlers and list its single canonical homepage. Because the site remains a single landing page, its service and case-study sections are still anchor sections rather than separate indexable URLs; dedicated pages can be considered when there is distinct content to support them. This audit covers the repository and Vercel domain configuration; Google Search Console indexing, query, and performance data were not available in this session.
+
+`git diff --check` passed. A local `npm run build` was attempted but remained silent for about two minutes and was stopped without diagnostics, consistent with earlier local build attempts recorded below. The connected Vercel production build remains the deployment validation step.
+
 ## 2026-10-16 — Primary navigation order
 
 Reordered the primary navigation to show Why us, Services, Packages, Case Study, and Career in that order, following the owner’s reference screenshot. The existing label text, anchor destinations, responsive menu behavior, and Career form link remain unchanged. This is a focused markup change in `components/landing-page.tsx`. `git diff --check` passed. Commit `c0618a8` was pushed to `origin/main`; Vercel Production deployment `dpl_4rR8g2Gq77ZKW6qfnhraDvFYN5i3` reached `READY` with `www.leagueofledgers.com` and `leagueofledgers.com` aliases.
