@@ -13,10 +13,29 @@ const services = [
   ["06", "1099 + tax support", "Give your CPA audit-ready reports, TIN matching, and a reconciled general ledger."],
 ];
 
-const packages = [
-  { name: "The Foundation", price: "$1,200", cadence: "15–20 hours / week", description: "A dependable monthly close for a business ready to get its numbers under control.", features: ["Bank and card categorization", "Income and COGS class tracking", "Monthly reconciliations", "Monthly accounting check-in"] },
-  { name: "The Operational Engine", price: "$2,800", cadence: "About 30 hours / week", description: "The hands-on back office that keeps your operation moving and your decisions informed.", popular: true, features: ["Everything in Foundation", "Full AP and vendor reconciliation", "Full AR, invoicing, and aging", "Weekly card reconciliation"] },
-  { name: "CFO-Ready Back Office", price: "$4,800", cadence: "40 hours / week", description: "A fully supported finance function for contractors ready to scale with clarity.", features: ["Everything in Operational Engine", "Loans, vehicles, and fixed assets", "Three-way PO matching", "Weekly controller review"] },
+const pricingPlans = [
+  { name: "Apprentice", price: "$600", description: "For owner-operators getting their books dialed in.", volume: "Typically 1–3 trucks under ~$750K revenue" },
+  { name: "Journeyman", price: "$1,000", description: "For established shops running multiple crews who need business clarity.", volume: "Typically 4–6 trucks doing $750K–$2M revenue", popular: true },
+  { name: "Master", price: "$1,650", description: "For operations that want full command of their numbers.", volume: "Typically 7+ trucks doing $2M+ revenue" },
+];
+
+const pricingFeatures = [
+  ["Transaction Categorization", "Monthly", "Weekly", "Weekly"],
+  ["Reconciliation", "Monthly", "Monthly", "Monthly"],
+  ["Receipt / Doc Capture", "✓", "✓", "✓"],
+  ["FSM Sync (ServiceTitan / Housecall Pro / Jobber)", "✓", "✓", "✓"],
+  ["1099 Tracking", "✓", "✓", "✓"],
+  ["Dedicated Bookkeeper", "✓", "✓", "✓"],
+  ["Financial Statements", "Standard Financial Reports", "Custom Financial Reports + KPI and benchmarking", "Custom Financial Reports + KPI and benchmarking + Video Walkthrough"],
+  ["Live Review Call", "Quarterly", "Quarterly", "Monthly"],
+  ["Job Costing", "", "", "✓"],
+];
+
+const addOns = [
+  ["Accounts Payable", "We manage vendor bills and payments so nothing slips."],
+  ["Payroll Support", "Payroll setup and processing."],
+  ["Cleanup / Catch-Up", "Behind or messy? We get you current and accurate."],
+  ["New Integration Setup", "ServiceTitan, Housecall Pro, Jobber, or other FSMs synced to your books."],
 ];
 
 const software = ["QuickBooks Online", "ServiceTitan", "Housecall Pro", "Gusto", "ADP Payroll", "Xero", "Slack", "Google Workspace"];
@@ -100,7 +119,48 @@ export default function LandingPage() {
 
       <section className="industries section-pad"><div className="section-heading"><div><div className="section-kicker">03 / Trade fluency</div><h2>We speak <em>your</em> language.</h2></div><p>Specialized books for the teams doing essential work in the real world.</p></div><div className="industry-grid"><article><span className="industry-icon">↯</span><h3>HVAC</h3><p>Seasonal revenue, equipment job costing, maintenance contracts, and ServiceTitan reconciliation.</p></article><article><span className="industry-icon">⌁</span><h3>Plumbing</h3><p>Materials versus labor, subcontractor management, and AP / AR that keeps projects flowing.</p></article><article><span className="industry-icon">＋</span><h3>Electrical</h3><p>Project costing, multi-crew payroll, permit tracking, and monthly reporting that holds up.</p></article></div></section>
 
-      <section className="packages section-pad" id="packages"><div className="section-heading"><div><div className="section-kicker">04 / Choose your support</div><h2>Scale with <em>intention.</em></h2></div><p>Flexible plans with senior oversight and a monthly check-in call built in.</p></div><div className="package-grid">{packages.map((item) => <article className={item.popular ? "package popular" : "package"} key={item.name}>{item.popular && <span className="popular-label">Most popular</span>}<span className="package-name">{item.name}</span><strong className="package-price">{item.price}<small>/mo</small></strong><span className="package-cadence">{item.cadence}</span><p>{item.description}</p><ul>{item.features.map((feature) => <li key={feature}><Mark type="check" /> {feature}</li>)}</ul><button className={item.popular ? "button button-dark full-width" : "button button-outline full-width"} onClick={() => setModalOpen(true)}>Explore this plan <Mark type="arrow" /></button></article>)}</div></section>
+      <section className="packages section-pad" id="packages">
+        <div className="pricing-heading">
+          <div className="section-kicker">04 / Monthly bookkeeping</div>
+          <h2>Pricing</h2>
+          <p>Flat monthly plans, built to grow with you.</p>
+        </div>
+        <div className="pricing-scroll">
+          <table className="pricing-table">
+            <thead>
+              <tr>
+                <th className="feature-heading" scope="col"><strong>Features</strong><span>Compare our plans</span></th>
+                {pricingPlans.map((plan) => <th className={plan.popular ? "plan-heading popular-plan" : "plan-heading"} scope="col" key={plan.name}>
+                  {plan.popular && <span className="plan-ribbon">Most popular</span>}
+                  <strong>{plan.name}</strong>
+                  <span className="plan-description">{plan.description}</span>
+                  <em>{plan.volume}</em>
+                </th>)}
+              </tr>
+            </thead>
+            <tbody>
+              {pricingFeatures.map(([feature, ...values]) => <tr key={feature}>
+                <th scope="row">{feature}</th>
+                {values.map((value, index) => <td key={`${feature}-${index}`} className={value === "✓" ? "included" : value ? "" : "not-included"}>{value || "—"}</td>)}
+              </tr>)}
+            </tbody>
+            <tfoot>
+              <tr>
+                <th scope="row" />
+                {pricingPlans.map((plan) => <td key={plan.name}>
+                  <strong className="plan-price">From {plan.price}<small>/mo</small></strong>
+                  <button className="button button-gold audit-button" onClick={() => setModalOpen(true)}>Book a Profit Lead Audit</button>
+                </td>)}
+              </tr>
+            </tfoot>
+          </table>
+        </div>
+        <p className="pricing-guarantee"><Mark type="check" /> 90-day money-back guarantee on recurring services <span>·</span> No hourly billing</p>
+        <div className="addons">
+          <div className="addons-heading"><h3>Add-ons not every shop needs</h3><p>Priced separately based on volume and complexity. We’ll scope it during your diagnostic.</p></div>
+          <div className="addons-grid">{addOns.map(([title, description]) => <article key={title}><h4>{title}</h4><p>{description}</p></article>)}</div>
+        </div>
+      </section>
 
       <section className="proof section-pad"><div className="quote-mark">“</div><blockquote>League of Ledgers cleaned up two years of messy books in under three weeks. Our CPA was shocked at how clean the records were.</blockquote><div className="quote-byline"><span>JT</span><span>HVAC company owner, Texas</span></div><div className="proof-foot"><span className="section-kicker">05 / Trusted in the field</span><div className="proof-pulse"><i style={{ width: `${pulse}%` }} /><span>Operations pulse / {pulse}% clear</span></div></div></section>
 
