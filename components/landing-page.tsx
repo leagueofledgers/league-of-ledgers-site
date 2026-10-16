@@ -1,17 +1,17 @@
 "use client";
 
-import { useEffect, useState } from "react";
+import { useState } from "react";
 
 const calendarUrl = "https://calendar.app.google/NKgF1z3srrzwcJ1NA";
 
 const services = [
-  ["01", "Monthly close", "P&L, balance sheet, and cash flow delivered within 5–7 business days."],
-  ["02", "AP / AR command", "Keep bills, invoices, vendors, and aging visible from one clean system."],
-  ["03", "Job costing", "See profitability by project, technician, and service line, not just total revenue."],
-  ["04", "Balance sheet", "Track loans, vehicles, fixed assets, and depreciation with confidence."],
-  ["05", "Field integrations", "Reconcile ServiceTitan, Housecall Pro, and operational data into QuickBooks."],
-  ["06", "1099 + tax support", "Give your CPA audit-ready reports, TIN matching, and a reconciled general ledger."],
-];
+  ["01", "Monthly Bookkeeping & Financial Close", "Keep your books accurate, reconciled, and up to date. Receive monthly Profit & Loss, Balance Sheet, and Cash Flow Statements typically within 5–7 business days after month-end, subject to timely receipt of complete records."],
+  ["02", "Accounts Payable & Receivable", "Gain visibility into customer invoices, vendor bills, and aging balances. Standard bookkeeping includes AR/AP reconciliation; hands-on bill, invoice, scheduling, and collections support is separately scoped and remains subject to your approval."],
+  ["03", "Job Costing & Profitability Analysis", "Organize labor, materials, subcontractor costs, and other direct job expenses so you can evaluate profitability by job, project, or service line. Advanced and technician-level reporting depends on reliable source data and agreed scope."],
+  ["04", "Balance Sheet Reconciliation & Asset Tracking", "Maintain accurate records of loans, credit cards, fixed assets, and other balance sheet accounts. Track asset purchases and prepare depreciation schedules or adjusting entries based on approved accounting policies."],
+  ["05", "Field-Service Software Reconciliation", "Keep QuickBooks aligned with existing ServiceTitan, Housecall Pro, or Jobber data. We review supported invoices, payments, deposits, and sync discrepancies; new setup, migration, mapping redesign, and major troubleshooting are separately scoped."],
+  ["06", "1099 Compliance & CPA Support", "Stay prepared for year-end with organized vendor records, 1099 tracking, TIN collection and verification support, reconciled statements, and CPA-ready reports. Form preparation or filing coordination is available under an agreed scope."],
+] as const;
 
 const pricingPlans = [
   { name: "Apprentice", price: "$600", description: "For owner-operators getting their books dialed in.", volume: "Typically 1–3 trucks under ~$750K revenue" },
@@ -20,23 +20,31 @@ const pricingPlans = [
 ];
 
 const pricingFeatures = [
-  ["Transaction Categorization", "Monthly", "Weekly", "Weekly"],
-  ["Reconciliation", "Monthly", "Monthly", "Monthly"],
-  ["Receipt / Doc Capture", "✓", "✓", "✓"],
-  ["FSM Sync (ServiceTitan / Housecall Pro / Jobber)", "✓", "✓", "✓"],
-  ["1099 Tracking", "✓", "✓", "✓"],
-  ["Dedicated Bookkeeper", "✓", "✓", "✓"],
-  ["Financial Statements", "Standard Financial Reports", "Custom Financial Reports + KPI and benchmarking", "Custom Financial Reports + KPI and benchmarking + Video Walkthrough"],
-  ["Live Review Call", "Quarterly", "Quarterly", "Monthly"],
-  ["Job Costing", "", "", "✓"],
-];
+  ["Transaction categorization", "Monthly", "Weekly", "Weekly"],
+  ["Bank & credit card reconciliation", "Monthly", "Monthly", "Monthly"],
+  ["Receipt / document organization", "Included", "Included", "Included"],
+  ["Existing FSM reconciliation", "Included", "Included", "Included"],
+  ["AR/AP balance reconciliation", "Included", "Included", "Included"],
+  ["1099 tracking", "Included", "Included", "Included"],
+  ["Dedicated bookkeeper", "Included", "Included", "Included"],
+  ["Monthly financial statements", "Standard", "Enhanced", "Enhanced"],
+  ["Month-end close", "Included", "Included", "Included"],
+  ["Basic job-costing reporting", "Add-on", "Included*", "Included*"],
+  ["Detailed job profitability", "Add-on", "Add-on", "Included*"],
+  ["KPI reporting", "Basic", "Enhanced", "Advanced"],
+  ["Financial review meeting", "Quarterly", "Quarterly", "Monthly"],
+  ["Payroll processing support", "Add-on", "Add-on", "Add-on"],
+  ["Hands-on AP/AR management", "Add-on", "Add-on", "Add-on"],
+] as const;
 
 const addOns = [
-  ["Accounts Payable", "We manage vendor bills and payments so nothing slips."],
-  ["Payroll Support", "Payroll setup and processing."],
-  ["Cleanup / Catch-Up", "Behind or messy? We get you current and accurate."],
-  ["New Integration Setup", "ServiceTitan, Housecall Pro, Jobber, or other FSMs synced to your books."],
-];
+  ["Accounts Payable & Receivable Management", "Vendor bill and customer invoice entry, aging monitoring, payment scheduling support, and follow-up. Payment execution stays with the client."],
+  ["Payroll Processing & Reconciliation", "Payroll preparation support, register review, journal entries, and reconciliation between the payroll platform, QuickBooks, and field-service data. Tax filings and remittances follow the provider or agreed scope."],
+  ["Cleanup & Catch-Up Bookkeeping", "Correct historical transactions, reconcile outstanding accounts, and restore reliable financial records before ongoing monthly work begins."],
+  ["FSM Integration Setup & Cleanup", "Configure supported connections, review account mappings, resolve sync discrepancies, and reconcile historical transactions for ServiceTitan, Housecall Pro, Jobber, or another supported platform."],
+  ["Advanced Job Costing", "Analyze profitability by job, labor category, equipment, or service line using the operational and financial data available in the agreed systems."],
+  ["1099 Preparation & Filing Support", "Review vendor records, validate available tax information, and prepare or coordinate required forms under a separately agreed scope."],
+] as const;
 
 const software = ["QuickBooks Online", "ServiceTitan", "Housecall Pro", "Gusto", "ADP Payroll", "Xero", "Slack", "Google Workspace"];
 
@@ -52,13 +60,6 @@ export default function LandingPage() {
   const [modalOpen, setModalOpen] = useState(false);
   const [submitted, setSubmitted] = useState(false);
   const [formError, setFormError] = useState("");
-  const [pulse, setPulse] = useState(20);
-
-  useEffect(() => {
-    const interval = window.setInterval(() => setPulse((current) => (current >= 78 ? 20 : current + 2)), 2200);
-    return () => window.clearInterval(interval);
-  }, []);
-
   const closeMenu = () => setMenuOpen(false);
 
   return (
@@ -75,28 +76,29 @@ export default function LandingPage() {
           <a href="#services" onClick={closeMenu}>Services</a>
           <a href="#packages" onClick={closeMenu}>Packages</a>
           <a href="#proof" onClick={closeMenu}>Why us</a>
-          <button className="button button-small button-gold" onClick={() => { closeMenu(); setModalOpen(true); }}>Start a conversation <Mark type="arrow" /></button>
+          <button className="button button-small button-gold" onClick={() => { closeMenu(); setModalOpen(true); }}>Book a Free Discovery Call <Mark type="arrow" /></button>
         </nav>
       </header>
 
       <section className="hero section-pad" id="top">
         <div className="hero-copy reveal-up">
-          <div className="eyebrow"><span className="live-dot" /> Bookkeeping for HVAC + MEP pros</div>
+          <div className="eyebrow"><span className="live-dot" /> Bookkeeping for HVAC, MEP &amp; Home-Service Contractors</div>
           <h1>Numbers that <em>move</em> your business forward.</h1>
           <p className="hero-lede">Clear books. Better decisions. More room to focus on the work that built your business.</p>
           <div className="hero-actions">
-            <button className="button button-dark" onClick={() => setModalOpen(true)}>Book a free discovery call <Mark type="arrow" /></button>
+            <button className="button button-dark" onClick={() => setModalOpen(true)}>Book a Free Discovery Call <Mark type="arrow" /></button>
             <a className="text-link" href="#services">See how we help <Mark type="arrow" /></a>
           </div>
           <div className="hero-metrics">
-            <div><strong>100%</strong><span>Audit-ready ledgers</span></div>
-            <div><strong>5–7</strong><span>Day month-end close</span></div>
-            <div><strong>20+</strong><span>Trade clients served</span></div>
+            <div><strong>Monthly</strong><span>Books reconciled</span></div>
+            <div><strong>5–7</strong><span>Business-day close*</span></div>
+            <div><strong>Built for</strong><span>HVAC, plumbing &amp; electrical</span></div>
           </div>
+          <p className="metric-note">* Typically after month-end records are complete.</p>
         </div>
-        <div className="hero-visual reveal-up delay-1" aria-label="Live bookkeeping operations dashboard preview">
-          <div className="visual-topline"><span>LIVE OPERATIONS VIEW</span><span className="status"><i /> Synced just now</span></div>
-          <div className="visual-heading"><div><span className="mini-label">MONTHLY CLOSE</span><strong>May 2026</strong></div><span className="trend">+18.4% <Mark type="arrow" /></span></div>
+        <div className="hero-visual reveal-up delay-1" aria-label="Example financial dashboard">
+          <div className="visual-topline"><span>EXAMPLE FINANCIAL DASHBOARD</span><span className="status"><i /> Illustrative data — not a live client account</span></div>
+          <div className="visual-heading"><div><span className="mini-label">ILLUSTRATIVE MONTHLY VIEW</span><strong>Example period</strong></div><span className="trend">Example trend <Mark type="arrow" /></span></div>
           <div className="chart-area">
             <div className="chart-grid"><i /><i /><i /><i /></div>
             <svg viewBox="0 0 520 190" role="img" aria-label="Upward financial performance chart" preserveAspectRatio="none">
@@ -104,10 +106,10 @@ export default function LandingPage() {
               <path d="M0 166 C30 154 42 160 68 143 S108 132 130 140 S172 116 192 121 S220 100 242 112 S283 81 305 95 S341 72 365 80 S405 54 424 62 S470 35 520 18 V190 H0Z" fill="url(#chartFill)" />
               <path d="M0 166 C30 154 42 160 68 143 S108 132 130 140 S172 116 192 121 S220 100 242 112 S283 81 305 95 S341 72 365 80 S405 54 424 62 S470 35 520 18" fill="none" stroke="#ffcf45" strokeWidth="4" strokeLinecap="round" />
             </svg>
-            <span className="chart-tooltip">$84,240 <small>net revenue</small></span>
+            <span className="chart-tooltip">$84,240 <small>illustrative net revenue</small></span>
           </div>
-          <div className="visual-cards"><div><span>Cash position</span><strong>$126,840</strong><b className="positive">+12.8%</b></div><div><span>Open items</span><strong>08</strong><b className="neutral">On track</b></div></div>
-          <div className="visual-footer"><span><Mark type="check" /> Bank reconciled</span><span><Mark type="check" /> Reports ready</span><span><Mark type="check" /> CPA friendly</span></div>
+          <div className="visual-cards"><div><span>Illustrative cash position</span><strong>$126,840</strong><b className="positive">Example movement</b></div><div><span>Example open items</span><strong>08</strong><b className="neutral">Example status</b></div></div>
+          <div className="visual-footer"><span><Mark type="check" /> Reconciled sample</span><span><Mark type="check" /> Reports preview</span><span><Mark type="check" /> CPA-friendly format</span></div>
         </div>
       </section>
 
@@ -117,13 +119,13 @@ export default function LandingPage() {
 
       <section className="services section-pad" id="services"><div className="section-heading"><div><div className="section-kicker">02 / What we do</div><h2>The back office, <em>handled.</em></h2></div><p>From daily transactions to year-end prep, your financial operations stay clear, current, and ready for the next decision.</p></div><div className="service-grid">{services.map(([number, title, text]) => <article className="service-item" key={number}><span className="service-number">{number}</span><h3>{title}</h3><p>{text}</p><span className="service-arrow"><Mark type="arrow" /></span></article>)}</div></section>
 
-      <section className="industries section-pad"><div className="section-heading"><div><div className="section-kicker">03 / Trade fluency</div><h2>We speak <em>your</em> language.</h2></div><p>Specialized books for the teams doing essential work in the real world.</p></div><div className="industry-grid"><article><span className="industry-icon">↯</span><h3>HVAC</h3><p>Seasonal revenue, equipment job costing, maintenance contracts, and ServiceTitan reconciliation.</p></article><article><span className="industry-icon">⌁</span><h3>Plumbing</h3><p>Materials versus labor, subcontractor management, and AP / AR that keeps projects flowing.</p></article><article><span className="industry-icon">＋</span><h3>Electrical</h3><p>Project costing, multi-crew payroll, permit tracking, and monthly reporting that holds up.</p></article></div></section>
+      <section className="industries section-pad"><div className="section-heading"><div><div className="section-kicker">03 / Trade fluency</div><h2>We speak <em>your</em> language.</h2></div><p>Specialized books for the teams doing essential work in the real world.</p></div><div className="industry-grid"><article><span className="industry-icon">↯</span><h3>HVAC</h3><p>Specialized bookkeeping for HVAC contractors, including maintenance agreements, equipment and labor costs, ServiceTitan reconciliation, and seasonal cash-flow reporting.</p></article><article><span className="industry-icon">⌁</span><h3>Plumbing</h3><p>Organized bookkeeping for plumbing businesses, covering materials, subcontractors, project expenses, and accounts receivable management.</p></article><article><span className="industry-icon">＋</span><h3>Electrical</h3><p>Financial reporting for electrical contractors, including project costs, multi-crew labor expenses, materials, and operational profitability.</p></article></div></section>
 
       <section className="packages section-pad" id="packages">
         <div className="pricing-heading">
           <div className="section-kicker">04 / Monthly bookkeeping</div>
           <h2>Pricing</h2>
-          <p>Flat monthly plans, built to grow with you.</p>
+          <p>Starting monthly plans for contractors who want consistent books and clear next steps.</p>
         </div>
         <div className="pricing-scroll">
           <table className="pricing-table">
@@ -141,7 +143,7 @@ export default function LandingPage() {
             <tbody>
               {pricingFeatures.map(([feature, ...values]) => <tr key={feature}>
                 <th scope="row">{feature}</th>
-                {values.map((value, index) => <td key={`${feature}-${index}`} className={value === "✓" ? "included" : value ? "" : "not-included"}>{value || "—"}</td>)}
+                {values.map((value, index) => <td key={`${feature}-${index}`} className={value.startsWith("Included") ? "included" : value === "Add-on" ? "add-on" : value ? "" : "not-included"}>{value || "—"}</td>)}
               </tr>)}
             </tbody>
             <tfoot>
@@ -149,28 +151,28 @@ export default function LandingPage() {
                 <th scope="row" />
                 {pricingPlans.map((plan) => <td key={plan.name}>
                   <strong className="plan-price">From {plan.price}<small>/mo</small></strong>
-                  <button className="button button-gold audit-button" onClick={() => setModalOpen(true)}>Book a Profit Lead Audit</button>
+                  <button className="button button-gold audit-button" onClick={() => setModalOpen(true)}>Book a Free Discovery Call <Mark type="arrow" /></button>
                 </td>)}
               </tr>
             </tfoot>
           </table>
         </div>
-        <p className="pricing-guarantee"><Mark type="check" /> 90-day money-back guarantee on recurring services <span>·</span> No hourly billing</p>
+        <p className="pricing-note"><Mark type="check" /> Starting prices reflect transaction volume, account complexity, connected systems, reporting requirements, and the condition of your existing books. Final pricing is confirmed after an initial review. <span>·</span> No hourly billing.</p>
         <div className="addons">
-          <div className="addons-heading"><h3>Add-ons not every shop needs</h3><p>Priced separately based on volume and complexity. We’ll scope it during your diagnostic.</p></div>
+          <div className="addons-heading"><h3>Optional services, scoped to your operation</h3><p>Not every shop needs these services every month. We’ll scope the right combination based on volume, systems, data quality, and the level of ownership you want to retain.</p></div>
           <div className="addons-grid">{addOns.map(([title, description]) => <article key={title}><h4>{title}</h4><p>{description}</p></article>)}</div>
         </div>
       </section>
 
-      <section className="proof section-pad"><div className="quote-mark">“</div><blockquote>League of Ledgers cleaned up two years of messy books in under three weeks. Our CPA was shocked at how clean the records were.</blockquote><div className="quote-byline"><span>JT</span><span>HVAC company owner, Texas</span></div><div className="proof-foot"><span className="section-kicker">05 / Trusted in the field</span><div className="proof-pulse"><i style={{ width: `${pulse}%` }} /><span>Operations pulse / {pulse}% clear</span></div></div></section>
+      <section className="proof section-pad"><div className="quote-mark">“</div><blockquote>Clean books give contractors a clearer next decision.</blockquote><div className="quote-byline"><span>LO</span><span>Illustrative practice statement — not a client testimonial</span></div><div className="proof-foot"><span className="section-kicker">05 / Our approach</span><div className="proof-pulse"><i aria-hidden="true" /><span>Clarity / built into every close</span></div></div></section>
 
-      <section className="software section-pad"><div className="section-kicker">06 / Fits your stack</div><h2>Already fluent in <em>your tools.</em></h2><p>Keep the systems you rely on. We make the numbers inside them work harder.</p><div className="software-list">{software.map((item) => <span key={item}><Mark type="grid" /> {item}</span>)}</div></section>
+      <section className="software section-pad"><div className="section-kicker">06 / Fits your stack</div><h2>Already fluent in <em>your tools.</em></h2><p>Keep the systems you rely on. We make the numbers inside them work harder. Active connections and export-based reconciliation depend on your current setup and agreed scope.</p><div className="software-list">{software.map((item) => <span key={item}><Mark type="grid" /> {item}</span>)}</div></section>
 
-      <section className="cta-section section-pad"><div className="cta-inner"><div className="section-kicker">07 / Your next clear move</div><h2>Ready to stop guessing?</h2><p>Bring us the messy books, the seasonal swings, and the big next step. We’ll bring clarity.</p><button className="button button-gold" onClick={() => setModalOpen(true)}>Book a free discovery call <Mark type="arrow" /></button></div></section>
+      <section className="cta-section section-pad"><div className="cta-inner"><div className="section-kicker">07 / Your next clear move</div><h2>Ready to stop guessing?</h2><p>Bring us the messy books, the seasonal swings, and the big next step. We’ll bring clarity.</p><button className="button button-gold" onClick={() => setModalOpen(true)}>Book a Free Discovery Call <Mark type="arrow" /></button></div></section>
 
       <footer><a className="brand" href="#top"><img className="brand-logo" src="/league-of-ledgers-logo.svg" alt="" aria-hidden="true" /><span>League of <b>Ledgers</b></span></a><span>© 2026 League of Ledgers</span><a href="mailto:hello@leagueofledgers.com">hello@leagueofledgers.com</a></footer>
 
-      {modalOpen && <div className="modal-backdrop" role="presentation" onMouseDown={(event) => { if (event.target === event.currentTarget) setModalOpen(false); }}><div className="modal" role="dialog" aria-modal="true" aria-labelledby="modal-title"><button className="modal-close" aria-label="Close booking form" onClick={() => setModalOpen(false)}>×</button>{submitted ? <div className="success-state"><span className="success-icon">✓</span><h2>Message received.</h2><p>We’ll be in touch shortly. You can also choose a time directly on our calendar.</p><a className="button button-dark" href={calendarUrl} target="_blank" rel="noreferrer">Open calendar <Mark type="arrow" /></a></div> : <><div className="section-kicker">Start here</div><h2 id="modal-title">Tell us what you’re building.</h2><p>Share a few details and we’ll shape the right next conversation.</p><form onSubmit={async (event) => { event.preventDefault(); setFormError(""); const form = event.currentTarget; const response = await fetch("/api/inquiries", { method: "POST", headers: { "Content-Type": "application/json" }, body: JSON.stringify(Object.fromEntries(new FormData(form))) }); if (response.ok) { setSubmitted(true); } else { const result = await response.json().catch(() => null); setFormError(result?.error ?? "Something went wrong. Please try again."); } }}><label>Name<input required name="name" placeholder="Your name" /></label><label>Work email<input required type="email" name="email" placeholder="you@company.com" /></label><label>What do you need help with?<textarea required name="message" placeholder="A quick note about your books or next step" rows={3} /></label>{formError && <p className="form-error" role="alert">{formError}</p>}<button className="button button-gold full-width" type="submit">Send inquiry <Mark type="arrow" /></button></form></>}</div></div>}
+      {modalOpen && <div className="modal-backdrop" role="presentation" onMouseDown={(event) => { if (event.target === event.currentTarget) setModalOpen(false); }}><div className="modal" role="dialog" aria-modal="true" aria-labelledby="modal-title"><button className="modal-close" aria-label="Close booking form" onClick={() => setModalOpen(false)}>×</button>{submitted ? <div className="success-state"><span className="success-icon">✓</span><h2>Message received.</h2><p>We’ll be in touch shortly. You can also choose a time directly on our calendar.</p><a className="button button-dark" href={calendarUrl} target="_blank" rel="noreferrer">Open calendar <Mark type="arrow" /></a></div> : <><div className="section-kicker">Free discovery call</div><h2 id="modal-title">Book a Free Discovery Call.</h2><p>Share a few details and we’ll shape the right next conversation.</p><form onSubmit={async (event) => { event.preventDefault(); setFormError(""); const form = event.currentTarget; const response = await fetch("/api/inquiries", { method: "POST", headers: { "Content-Type": "application/json" }, body: JSON.stringify(Object.fromEntries(new FormData(form))) }); if (response.ok) { setSubmitted(true); } else { const result = await response.json().catch(() => null); setFormError(result?.error ?? "Something went wrong. Please try again."); } }}><label>Name<input required name="name" placeholder="Your name" /></label><label>Work email<input required type="email" name="email" placeholder="you@company.com" /></label><label>What do you need help with?<textarea required name="message" placeholder="A quick note about your books or next step" rows={3} /></label>{formError && <p className="form-error" role="alert">{formError}</p>}<button className="button button-gold full-width" type="submit">Send inquiry <Mark type="arrow" /></button></form></>}</div></div>}
     </main>
   );
 }

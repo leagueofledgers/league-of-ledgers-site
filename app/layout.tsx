@@ -3,7 +3,7 @@ import "./globals.css";
 
 export const metadata: Metadata = {
   title: "League of Ledgers | Books that move your business forward",
-  description: "Modern bookkeeping and financial operations for HVAC and MEP contractors.",
+  description: "Bookkeeping and financial operations for HVAC, MEP, and home-service contractors.",
 };
 
 export default function RootLayout({ children }: Readonly<{ children: React.ReactNode }>) {
