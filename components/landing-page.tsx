@@ -14,9 +14,9 @@ const services = [
 ] as const;
 
 const pricingPlans = [
-  { name: "Apprentice", price: "$600", description: "For owner-operators getting their books dialed in.", volume: "Typically 1–3 trucks under ~$750K revenue" },
-  { name: "Journeyman", price: "$1,000", description: "For established shops running multiple crews who need business clarity.", volume: "Typically 4–6 trucks doing $750K–$2M revenue", popular: true },
-  { name: "Master", price: "$1,650", description: "For operations that want full command of their numbers.", volume: "Typically 7+ trucks doing $2M+ revenue" },
+  { name: "Apprentice", price: "$599", description: "For owner-operators getting their books dialed in.", volume: "Typically 1–3 trucks under ~$750K revenue" },
+  { name: "Journeyman", price: "$999", description: "For established shops running multiple crews who need business clarity.", volume: "Typically 4–6 trucks doing $750K–$2M revenue", popular: true },
+  { name: "Master", price: "$1,499", description: "For operations that want full command of their numbers.", volume: "Typically 7+ trucks doing $2M+ revenue" },
 ];
 
 const pricingFeatures = [
@@ -66,7 +66,7 @@ export default function LandingPage() {
     <main>
       <header className="site-header">
         <a className="brand" href="#top" onClick={closeMenu}>
-          <img className="brand-logo" src="/league-of-ledgers-logo.svg" alt="" aria-hidden="true" />
+          <img className="brand-logo" src="/league-of-ledgers-logo.jpg" alt="" aria-hidden="true" />
           <span>League of <b>Ledgers</b></span>
         </a>
         <button className="menu-toggle" aria-expanded={menuOpen} aria-label="Toggle navigation" onClick={() => setMenuOpen(!menuOpen)}>
@@ -171,7 +171,7 @@ export default function LandingPage() {
 
       <section className="cta-section section-pad"><div className="cta-inner"><div className="section-kicker">07 / Your next clear move</div><h2>Ready to stop guessing?</h2><p>Bring us the messy books, the seasonal swings, and the big next step. We’ll bring clarity.</p><button className="button button-gold" onClick={() => setModalOpen(true)}>Book a Free Discovery Call <Mark type="arrow" /></button></div></section>
 
-      <footer><a className="brand" href="#top"><img className="brand-logo" src="/league-of-ledgers-logo.svg" alt="" aria-hidden="true" /><span>League of <b>Ledgers</b></span></a><span>© 2026 League of Ledgers</span><a href="mailto:hello@leagueofledgers.com">hello@leagueofledgers.com</a></footer>
+      <footer><a className="brand" href="#top"><img className="brand-logo" src="/league-of-ledgers-logo.jpg" alt="" aria-hidden="true" /><span>League of <b>Ledgers</b></span></a><span>© 2026 League of Ledgers</span><a href="mailto:marcus@leagueofledgers.com">marcus@leagueofledgers.com</a></footer>
 
       {modalOpen && <div className="modal-backdrop" role="presentation" onMouseDown={(event) => { if (event.target === event.currentTarget) setModalOpen(false); }}><div className="modal" role="dialog" aria-modal="true" aria-labelledby="modal-title"><button className="modal-close" aria-label="Close booking form" onClick={() => setModalOpen(false)}>×</button>{submitted ? <div className="success-state"><span className="success-icon">✓</span><h2>Message received.</h2><p>We’ll be in touch shortly. You can also choose a time directly on our calendar.</p><a className="button button-dark" href={calendarUrl} target="_blank" rel="noreferrer">Open calendar <Mark type="arrow" /></a></div> : <><div className="section-kicker">Free discovery call</div><h2 id="modal-title">Book a Free Discovery Call.</h2><p>Share a few details and we’ll shape the right next conversation.</p><form onSubmit={async (event) => { event.preventDefault(); setFormError(""); const form = event.currentTarget; const response = await fetch("/api/inquiries", { method: "POST", headers: { "Content-Type": "application/json" }, body: JSON.stringify(Object.fromEntries(new FormData(form))) }); if (response.ok) { setSubmitted(true); } else { const result = await response.json().catch(() => null); setFormError(result?.error ?? "Something went wrong. Please try again."); } }}><label>Name<input required name="name" placeholder="Your name" /></label><label>Work email<input required type="email" name="email" placeholder="you@company.com" /></label><label>What do you need help with?<textarea required name="message" placeholder="A quick note about your books or next step" rows={3} /></label>{formError && <p className="form-error" role="alert">{formError}</p>}<button className="button button-gold full-width" type="submit">Send inquiry <Mark type="arrow" /></button></form></>}</div></div>}
     </main>
