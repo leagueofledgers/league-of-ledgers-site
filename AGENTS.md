@@ -12,7 +12,7 @@ This block is written and re-added by `next dev` — verify at `node_modules/nex
 
 ## 2026-10-16 — Primary navigation order
 
-Reordered the primary navigation to show Why us, Services, Packages, Case Study, and Career in that order, following the owner’s reference screenshot. The existing label text, anchor destinations, responsive menu behavior, and Career form link remain unchanged. This is a focused markup change in `components/landing-page.tsx`; deployment status will be recorded after the connected Vercel build completes.
+Reordered the primary navigation to show Why us, Services, Packages, Case Study, and Career in that order, following the owner’s reference screenshot. The existing label text, anchor destinations, responsive menu behavior, and Career form link remain unchanged. This is a focused markup change in `components/landing-page.tsx`. `git diff --check` passed. Commit `c0618a8` was pushed to `origin/main`; Vercel Production deployment `dpl_4rR8g2Gq77ZKW6qfnhraDvFYN5i3` reached `READY` with `www.leagueofledgers.com` and `leagueofledgers.com` aliases.
 
 ## 2026-10-16 — Compact package cards and trade icons
 
