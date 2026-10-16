@@ -10,6 +10,10 @@ This block is written and re-added by `next dev` — verify at `node_modules/nex
 
 # Development history
 
+## 2026-10-16 — Case Study navigation label and order
+
+The top navigation now places the Case Study anchor before Career, matching the requested order, and uses the singular “Case Study” label in both the navigation and section heading. The Career link still opens the supplied application form in a new tab. This is a focused navigation/content-label adjustment in `components/landing-page.tsx`; the case-study content and section anchor remain unchanged.
+
 ## 2026-10-16 — Tulsa HVAC cleanup case study
 
 The Case Studies section now presents the supplied Tulsa HVAC bookkeeping-cleanup story instead of the “In progress” placeholder. The write-up identifies League of Ledgers as the provider and summarizes the documented challenge, approach, and work completed. It uses aggregate figures from the supplied case-study file (including 229 statement items, $140K+ in supplier activity, and 61 missing invoices recorded) without adding new results or claims.

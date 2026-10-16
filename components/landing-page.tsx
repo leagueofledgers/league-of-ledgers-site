@@ -137,8 +137,8 @@ export default function LandingPage() {
           <a href="#services" onClick={closeMenu}>Services</a>
           <a href="#packages" onClick={closeMenu}>Packages</a>
           <a href="#proof" onClick={closeMenu}>Why us</a>
+          <a href="#case-studies" onClick={closeMenu}>Case Study</a>
           <a href={careerFormUrl} target="_blank" rel="noopener noreferrer" onClick={closeMenu}>Career</a>
-          <a href="#case-studies" onClick={closeMenu}>Case Studies</a>
           <button type="button" className="button button-small button-gold" onClick={openModal}>Book a Free Discovery Call <Mark type="arrow" /></button>
         </nav>
       </header>
@@ -233,7 +233,7 @@ export default function LandingPage() {
       <section className="case-studies section-pad" id="case-studies" aria-labelledby="case-studies-title">
         <div className="case-studies-content">
           <div className="section-kicker">06 / Client work</div>
-          <h2 id="case-studies-title">Case Studies</h2>
+          <h2 id="case-studies-title">Case Study</h2>
           <article className="case-study-card">
             <div className="case-study-meta"><span className="case-study-type">Bookkeeping cleanup</span><span>Tulsa, Oklahoma</span></div>
             <h3>Vendor-record cleanup for an HVAC contractor</h3>
