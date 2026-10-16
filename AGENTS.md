@@ -10,6 +10,10 @@ This block is written and re-added by `next dev` — verify at `node_modules/nex
 
 # Development history
 
+## 2026-10-16 — Primary navigation order
+
+Reordered the primary navigation to show Why us, Services, Packages, Case Study, and Career in that order, following the owner’s reference screenshot. The existing label text, anchor destinations, responsive menu behavior, and Career form link remain unchanged. This is a focused markup change in `components/landing-page.tsx`; deployment status will be recorded after the connected Vercel build completes.
+
 ## 2026-10-16 — Compact package cards and trade icons
 
 The long, horizontally scrolling package-comparison table was replaced with three responsive cards based on the owner’s visual reference. The cards keep the existing Apprentice, Journeyman, and Master names, displayed starting prices, fit descriptions, most-popular highlight, discovery-call action, pricing qualification, and optional-service section, while reducing each plan to five or fewer scannable features. The feature summaries preserve the existing tier boundaries for transaction frequency, statements, job costing, KPI reporting, and review cadence. The old text in the HVAC, Plumbing, and Electrical industry cards remains unchanged; only their unicode symbols were replaced with decorative inline SVG icons based on the new reference. `app/globals.css` now lays out the cards in three columns on wide screens, two on tablet, and one on mobile, with the CTA aligned at the bottom of each card. The changes affect `components/landing-page.tsx`, `app/globals.css`, and this history file. `git diff --check` passed. Commit `3232f7a` was pushed to `origin/main`; Vercel Production deployment `dpl_DxtFQNV4UoMCEn7zmqvxeDzRsJVG` reached `READY` with `www.leagueofledgers.com` and `leagueofledgers.com` aliases.

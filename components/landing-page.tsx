@@ -154,9 +154,9 @@ export default function LandingPage() {
           <span /><span /><span />
         </button>
         <nav id="primary-navigation" className={menuOpen ? "nav-links is-open" : "nav-links"}>
+          <a href="#proof" onClick={closeMenu}>Why us</a>
           <a href="#services" onClick={closeMenu}>Services</a>
           <a href="#packages" onClick={closeMenu}>Packages</a>
-          <a href="#proof" onClick={closeMenu}>Why us</a>
           <a href="#case-studies" onClick={closeMenu}>Case Study</a>
           <a href={careerFormUrl} target="_blank" rel="noopener noreferrer" onClick={closeMenu}>Career</a>
           <button type="button" className="button button-small button-gold" onClick={openModal}>Book a Free Discovery Call <Mark type="arrow" /></button>
