@@ -15,27 +15,47 @@ const services = [
 ] as const;
 
 const pricingPlans = [
-  { name: "Apprentice", price: "$599", description: "For owner-operators getting their books dialed in.", volume: "Typically 1–3 trucks under ~$750K revenue" },
-  { name: "Journeyman", price: "$999", description: "For established shops running multiple crews who need business clarity.", volume: "Typically 4–6 trucks doing $750K–$2M revenue", popular: true },
-  { name: "Master", price: "$1,499", description: "For operations that want full command of their numbers.", volume: "Typically 7+ trucks doing $2M+ revenue" },
-];
-
-const pricingFeatures = [
-  ["Transaction categorization", "Monthly", "Weekly", "Weekly"],
-  ["Bank & credit card reconciliation", "Monthly", "Monthly", "Monthly"],
-  ["Receipt / document organization", "Included", "Included", "Included"],
-  ["Existing FSM reconciliation", "Included", "Included", "Included"],
-  ["AR/AP balance reconciliation", "Included", "Included", "Included"],
-  ["1099 tracking", "Included", "Included", "Included"],
-  ["Dedicated bookkeeper", "Included", "Included", "Included"],
-  ["Monthly financial statements", "Standard", "Enhanced", "Enhanced"],
-  ["Month-end close", "Included", "Included", "Included"],
-  ["Basic job-costing reporting", "Add-on", "Included*", "Included*"],
-  ["Detailed job profitability", "Add-on", "Add-on", "Included*"],
-  ["KPI reporting", "Basic", "Enhanced", "Advanced"],
-  ["Financial review meeting", "Quarterly", "Quarterly", "Monthly"],
-  ["Payroll processing support", "Add-on", "Add-on", "Add-on"],
-  ["Hands-on AP/AR management", "Add-on", "Add-on", "Add-on"],
+  {
+    name: "Apprentice",
+    price: "$599",
+    description: "Consistent bookkeeping for owner-operators.",
+    volume: "Typically 1–3 trucks under ~$750K revenue",
+    features: [
+      "Monthly transaction categorization",
+      "Monthly bank and credit card reconciliation",
+      "Month-end close, statements, and document organization",
+      "Existing FSM, AR/AP, and 1099 tracking",
+      "Dedicated bookkeeper and quarterly review",
+    ],
+    popular: false,
+  },
+  {
+    name: "Journeyman",
+    price: "$999",
+    description: "More reporting for established, multi-crew shops.",
+    volume: "Typically 4–6 trucks doing $750K–$2M revenue",
+    features: [
+      "All Apprentice features",
+      "Weekly transaction categorization",
+      "Enhanced financial statements and KPI reporting",
+      "Basic job costing included*",
+      "Detailed job profitability available as an add-on",
+    ],
+    popular: true,
+  },
+  {
+    name: "Master",
+    price: "$1,499",
+    description: "Deeper financial visibility for larger operations.",
+    volume: "Typically 7+ trucks doing $2M+ revenue",
+    features: [
+      "All Journeyman features",
+      "Detailed job-profitability reporting included*",
+      "Advanced KPI reporting",
+      "Monthly financial review",
+    ],
+    popular: false,
+  },
 ] as const;
 
 const addOns = [
@@ -182,7 +202,7 @@ export default function LandingPage() {
 
       <section className="services section-pad" id="services"><div className="section-heading"><div><div className="section-kicker">02 / What we do</div><h2>The back office, <em>handled.</em></h2></div><p>From daily transactions to year-end prep, your financial operations stay clear, current, and ready for the next decision.</p></div><div className="service-grid">{services.map(([number, title, text]) => <article className="service-item" key={number}><span className="service-number">{number}</span><h3>{title}</h3><p>{text}</p><span className="service-arrow"><Mark type="arrow" /></span></article>)}</div></section>
 
-      <section className="industries section-pad"><div className="section-heading"><div><div className="section-kicker">03 / Trade fluency</div><h2>We speak <em>your</em> language.</h2></div><p>Specialized books for the teams doing essential work in the real world.</p></div><div className="industry-grid"><article><span className="industry-icon">↯</span><h3>HVAC</h3><p>Specialized bookkeeping for HVAC contractors, including maintenance agreements, equipment and labor costs, ServiceTitan reconciliation, and seasonal cash-flow reporting.</p></article><article><span className="industry-icon">⌁</span><h3>Plumbing</h3><p>Organized bookkeeping for plumbing businesses, covering materials, subcontractors, project expenses, and accounts receivable management.</p></article><article><span className="industry-icon">＋</span><h3>Electrical</h3><p>Financial reporting for electrical contractors, including project costs, multi-crew labor expenses, materials, and operational profitability.</p></article></div></section>
+      <section className="industries section-pad"><div className="section-heading"><div><div className="section-kicker">03 / Trade fluency</div><h2>We speak <em>your</em> language.</h2></div><p>Specialized books for the teams doing essential work in the real world.</p></div><div className="industry-grid"><article><span className="industry-icon"><svg viewBox="0 0 64 64" aria-hidden="true"><rect x="8" y="10" width="36" height="43" rx="4" fill="none" stroke="#0b4265" strokeWidth="3.5" /><circle cx="26" cy="31.5" r="9" fill="none" stroke="#0b4265" strokeWidth="3" /><path d="M26 23v17M17.5 31.5h17M20 25.5l12 12M32 25.5l-12 12" fill="none" stroke="#e9ae22" strokeWidth="2.5" strokeLinecap="round" /><path d="M50 17h9M50 25h8M50 33h7M47 49c4-4 8-4 12 0" fill="none" stroke="#0b4265" strokeWidth="3" strokeLinecap="round" /></svg></span><h3>HVAC</h3><p>Specialized bookkeeping for HVAC contractors, including maintenance agreements, equipment and labor costs, ServiceTitan reconciliation, and seasonal cash-flow reporting.</p></article><article><span className="industry-icon"><svg viewBox="0 0 64 64" aria-hidden="true"><path d="M16 13v25c0 9 6 15 15 15h5c9 0 14-5 14-14V18h5" fill="none" stroke="#0b4265" strokeWidth="6" strokeLinecap="round" strokeLinejoin="round" /><path d="M12 11h13" fill="none" stroke="#e9ae22" strokeWidth="5" strokeLinecap="round" /><path d="M42 57c-3.5-4.5-6-7.5-6-10.5a6 6 0 0 1 12 0c0 3-2.5 6-6 10.5Z" fill="#e9ae22" /><circle cx="46" cy="35" r="3.5" fill="#e9ae22" /></svg></span><h3>Plumbing</h3><p>Organized bookkeeping for plumbing businesses, covering materials, subcontractors, project expenses, and accounts receivable management.</p></article><article><span className="industry-icon"><svg viewBox="0 0 64 64" aria-hidden="true"><path d="M35 7 19 32h12l-5 25 20-32H34l5-18Z" fill="#e9ae22" stroke="#0b4265" strokeWidth="3" strokeLinejoin="round" /><path d="M8 21h9M5 31h8M48 13h8M50 44h9" fill="none" stroke="#0b4265" strokeWidth="3" strokeLinecap="round" /><path d="M53 25v14M46 32h14" fill="none" stroke="#e9ae22" strokeWidth="3" strokeLinecap="round" /></svg></span><h3>Electrical</h3><p>Financial reporting for electrical contractors, including project costs, multi-crew labor expenses, materials, and operational profitability.</p></article></div></section>
 
       <section className="packages section-pad" id="packages">
         <div className="pricing-heading">
@@ -190,35 +210,18 @@ export default function LandingPage() {
           <h2>Pricing</h2>
           <p>Starting monthly plans for contractors who want consistent books and clear next steps.</p>
         </div>
-        <div className="pricing-scroll">
-          <table className="pricing-table">
-            <thead>
-              <tr>
-                <th className="feature-heading" scope="col"><strong>Features</strong><span>Compare our plans</span></th>
-                {pricingPlans.map((plan) => <th className={plan.popular ? "plan-heading popular-plan" : "plan-heading"} scope="col" key={plan.name}>
-                  {plan.popular && <span className="plan-ribbon">Most popular</span>}
-                  <strong>{plan.name}</strong>
-                  <span className="plan-description">{plan.description}</span>
-                  <em>{plan.volume}</em>
-                </th>)}
-              </tr>
-            </thead>
-            <tbody>
-              {pricingFeatures.map(([feature, ...values]) => <tr key={feature}>
-                <th scope="row">{feature}</th>
-                {values.map((value, index) => <td key={`${feature}-${index}`} className={value.startsWith("Included") ? "included" : value === "Add-on" ? "add-on" : value ? "" : "not-included"}>{value || "—"}</td>)}
-              </tr>)}
-            </tbody>
-            <tfoot>
-              <tr>
-                <th scope="row" />
-                {pricingPlans.map((plan) => <td key={plan.name}>
-                  <strong className="plan-price">From {plan.price}<small>/mo</small></strong>
-                  <button type="button" className="button button-gold audit-button" onClick={openModal}>Book a Free Discovery Call <Mark type="arrow" /></button>
-                </td>)}
-              </tr>
-            </tfoot>
-          </table>
+        <div className="pricing-cards">
+          {pricingPlans.map((plan) => <article className={plan.popular ? "pricing-card pricing-card-popular" : "pricing-card"} key={plan.name} aria-labelledby={`plan-${plan.name.toLowerCase()}`}>
+            {plan.popular && <span className="plan-ribbon">Most popular</span>}
+            <h3 id={`plan-${plan.name.toLowerCase()}`}>{plan.name}</h3>
+            <strong className="plan-price">From {plan.price}<small>/mo</small></strong>
+            <p className="pricing-card-fit">{plan.volume}</p>
+            <p className="pricing-card-description">{plan.description}</p>
+            <ul className="pricing-card-features" aria-label={`${plan.name} features`}>
+              {plan.features.map((feature) => <li key={feature}><Mark type="check" /><span>{feature}</span></li>)}
+            </ul>
+            <button type="button" className="button button-gold audit-button" onClick={openModal}>Book a Free Discovery Call <Mark type="arrow" /></button>
+          </article>)}
         </div>
         <p className="pricing-footnote">* Job-costing coverage is subject to source-data quality, system capabilities, and agreed reporting scope.</p>
         <p className="pricing-note"><Mark type="check" /> Starting prices reflect transaction volume, account complexity, connected systems, reporting requirements, and the condition of your existing books. Final pricing is confirmed after an initial review. <span>·</span> No hourly billing.</p>
