@@ -10,6 +10,12 @@ This block is written and re-added by `next dev` — verify at `node_modules/nex
 
 # Development history
 
+## 2026-10-16 — Career and case-studies navigation
+
+The primary navigation now includes a Career link that opens the Google Forms URL supplied by the site owner in a new tab, plus a Case Studies link that scrolls to an on-page placeholder. The placeholder is plainly marked “In progress” and contains no client claims or sample outcomes, so it can be replaced when approved case-study material is ready. The page remains a single-page site with anchor navigation.
+
+Adding two more navigation items made the existing desktop navigation too crowded at tablet and smaller laptop widths. The hamburger menu now takes over through 992 pixels, while the existing mobile dropdown behavior and wider desktop navigation remain intact. The changes are in `components/landing-page.tsx` and `app/globals.css`. `git diff --check` passed. A local `npm run build` remained silent for about two minutes and was interrupted; the Git-connected Vercel production build result will be recorded after publication.
+
 ## 2026-10-16 — Removal of unverified testimonial drafts
 
 The landing page had three fictional contractor quotes shown as draft testimonials, plus generic owner-role labels, a Testimonials navigation link, and notices explaining that the copy needed client approval. Because the quotes were not based on actual client statements, this revision removes the cards and all associated draft/disclaimer copy rather than presenting them as genuine reviews. The Testimonials link and unused testimonial styling were also removed, and the remaining section numbers were adjusted so the page flows from monthly bookkeeping to software fit and the final call to action. The service, pricing, inquiry, and contact content remains in place. Verified client feedback can be added when real, approved wording and attribution are available. `git diff --check` passed. Commit `6b6ee083a391ca7f8c8b8d1e998f2644a9ee4e1d` was pushed to `origin/main`, and Vercel production deployment `dpl_GXfq9eMtLprkWFZzXNWaMXHndyi5` reached `READY` with the primary site aliases.

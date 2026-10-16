@@ -3,6 +3,7 @@
 import { useEffect, useRef, useState, type FormEvent } from "react";
 
 const calendarUrl = "https://calendar.app.google/NKgF1z3srrzwcJ1NA";
+const careerFormUrl = "https://docs.google.com/forms/d/e/1FAIpQLSdu7s-53cJIMluJk_icludzpZmeA4RiZ9L2vPlLDnu38_Z6ow/viewform?usp=publish-editor";
 
 const services = [
   ["01", "Monthly Bookkeeping & Financial Close", "Keep your books accurate, reconciled, and up to date. Receive monthly Profit & Loss, Balance Sheet, and Cash Flow Statements typically within 5–7 business days after month-end, subject to timely receipt of complete records."],
@@ -136,6 +137,8 @@ export default function LandingPage() {
           <a href="#services" onClick={closeMenu}>Services</a>
           <a href="#packages" onClick={closeMenu}>Packages</a>
           <a href="#proof" onClick={closeMenu}>Why us</a>
+          <a href={careerFormUrl} target="_blank" rel="noopener noreferrer" onClick={closeMenu}>Career</a>
+          <a href="#case-studies" onClick={closeMenu}>Case Studies</a>
           <button type="button" className="button button-small button-gold" onClick={openModal}>Book a Free Discovery Call <Mark type="arrow" /></button>
         </nav>
       </header>
@@ -226,6 +229,8 @@ export default function LandingPage() {
       </section>
 
       <section className="software section-pad"><div className="section-kicker">05 / Fits your stack</div><h2>Already fluent in <em>your tools.</em></h2><p>Keep the systems you rely on. We make the numbers inside them work harder. Active connections and export-based reconciliation depend on your current setup and agreed scope.</p><div className="software-list">{software.map((item) => <span key={item}><Mark type="grid" /> {item}</span>)}</div></section>
+
+      <section className="case-studies section-pad" id="case-studies" aria-labelledby="case-studies-title"><div className="case-studies-panel"><span className="case-studies-status">In progress</span><div className="section-kicker">Case studies</div><h2 id="case-studies-title">Case Studies</h2><p>Case studies are in progress. Please check back for updates.</p></div></section>
 
       <section className="cta-section section-pad"><div className="cta-inner"><div className="section-kicker">06 / Your next clear move</div><h2>Ready to stop guessing?</h2><p>Bring us the messy books, the seasonal swings, and the big next step. We’ll bring clarity.</p><button type="button" className="button button-gold" onClick={openModal}>Book a Free Discovery Call <Mark type="arrow" /></button></div></section>
 
