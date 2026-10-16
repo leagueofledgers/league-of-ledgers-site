@@ -46,12 +46,6 @@ const addOns = [
   ["1099 Preparation & Filing Support", "Review vendor records, validate available tax information, and prepare or coordinate required forms under a separately agreed scope."],
 ] as const;
 
-const testimonials = [
-  ["\"We finally have one clear monthly financial picture to work from instead of a pile of disconnected reports.\"", "HVAC contractor owner", "Draft testimonial — pending client approval", "HV"],
-  ["\"The close process helps us see where each job stands before the next decision is already made for us.\"", "Plumbing business owner", "Draft testimonial — pending client approval", "PL"],
-  ["\"Our books are easier to understand, easier to review, and much more useful in the day-to-day operation.\"", "Electrical contractor owner", "Draft testimonial — pending client approval", "EL"],
-] as const;
-
 const software = ["QuickBooks Online", "ServiceTitan", "Housecall Pro", "Gusto", "ADP Payroll", "Xero", "Slack", "Google Workspace"];
 
 function Mark({ type }: { type: "spark" | "arrow" | "grid" | "check" }) {
@@ -142,7 +136,6 @@ export default function LandingPage() {
           <a href="#services" onClick={closeMenu}>Services</a>
           <a href="#packages" onClick={closeMenu}>Packages</a>
           <a href="#proof" onClick={closeMenu}>Why us</a>
-          <a href="#testimonials" onClick={closeMenu}>Testimonials</a>
           <button type="button" className="button button-small button-gold" onClick={openModal}>Book a Free Discovery Call <Mark type="arrow" /></button>
         </nav>
       </header>
@@ -232,17 +225,9 @@ export default function LandingPage() {
         </div>
       </section>
 
-      <section className="proof section-pad" id="testimonials">
-        <div className="section-kicker">05 / Client perspectives</div>
-        <div className="testimonials-heading"><h2>Clearer books, <em>better decisions.</em></h2><p>These testimonial drafts are written for review and should be replaced with approved client words and attribution before publication.</p></div>
-        <div className="testimonial-grid">{testimonials.map(([quote, role, label, initials]) => <article className="testimonial-card" key={role}><blockquote>{quote}</blockquote><div className="testimonial-attribution"><span className="testimonial-avatar">{initials}</span><span><strong>{role}</strong><small>{label}</small></span></div></article>)}</div>
-        <p className="testimonial-disclaimer"><Mark type="check" /> Draft copy only — replace each card with verified client feedback before presenting it as a testimonial.</p>
-        <div className="proof-foot"><span className="section-kicker">Our approach</span><div className="proof-pulse"><i aria-hidden="true" /><span>Clarity / built into every close</span></div></div>
-      </section>
+      <section className="software section-pad"><div className="section-kicker">05 / Fits your stack</div><h2>Already fluent in <em>your tools.</em></h2><p>Keep the systems you rely on. We make the numbers inside them work harder. Active connections and export-based reconciliation depend on your current setup and agreed scope.</p><div className="software-list">{software.map((item) => <span key={item}><Mark type="grid" /> {item}</span>)}</div></section>
 
-      <section className="software section-pad"><div className="section-kicker">06 / Fits your stack</div><h2>Already fluent in <em>your tools.</em></h2><p>Keep the systems you rely on. We make the numbers inside them work harder. Active connections and export-based reconciliation depend on your current setup and agreed scope.</p><div className="software-list">{software.map((item) => <span key={item}><Mark type="grid" /> {item}</span>)}</div></section>
-
-      <section className="cta-section section-pad"><div className="cta-inner"><div className="section-kicker">07 / Your next clear move</div><h2>Ready to stop guessing?</h2><p>Bring us the messy books, the seasonal swings, and the big next step. We’ll bring clarity.</p><button type="button" className="button button-gold" onClick={openModal}>Book a Free Discovery Call <Mark type="arrow" /></button></div></section>
+      <section className="cta-section section-pad"><div className="cta-inner"><div className="section-kicker">06 / Your next clear move</div><h2>Ready to stop guessing?</h2><p>Bring us the messy books, the seasonal swings, and the big next step. We’ll bring clarity.</p><button type="button" className="button button-gold" onClick={openModal}>Book a Free Discovery Call <Mark type="arrow" /></button></div></section>
 
       <footer><a className="brand" href="#top"><img className="brand-logo" src="/league-of-ledgers-logo.jpg" alt="" aria-hidden="true" /><span>League of <b>Ledgers</b></span></a><span>© 2026 League of Ledgers</span><a href="mailto:marcus@leagueofledgers.com">marcus@leagueofledgers.com</a></footer>
 

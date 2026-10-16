@@ -341,8 +341,7 @@ h2 em {
 
 .visual-topline,
 .visual-heading,
-.visual-footer,
-.proof-foot {
+.visual-footer {
   align-items: center;
   display: flex;
   justify-content: space-between;
@@ -1022,188 +1021,6 @@ h2 em {
   margin: 0;
 }
 
-.proof {
-  background: #fff;
-  color: var(--ink);
-}
-
-.testimonials-heading {
-  align-items: end;
-  display: grid;
-  gap: 40px;
-  grid-template-columns: minmax(0, 1fr) minmax(240px, 0.58fr);
-  margin: 18px 0 34px;
-}
-
-.testimonials-heading h2 {
-  color: var(--deep-navy);
-  font-size: clamp(2rem, 3.8vw, 2.8rem);
-  font-weight: 700;
-  letter-spacing: -0.5px;
-  line-height: 1.2;
-  margin: 0;
-}
-
-.testimonials-heading h2 em {
-  color: var(--orange);
-  font-style: normal;
-}
-
-.testimonials-heading p {
-  color: var(--muted);
-  font-size: 0.95rem;
-  line-height: 1.65;
-  margin: 0;
-}
-
-.testimonial-grid {
-  display: grid;
-  gap: 18px;
-  grid-template-columns: repeat(3, minmax(0, 1fr));
-}
-
-.testimonial-card {
-  background: #f8fafc;
-  border: 1px solid var(--line);
-  border-radius: 16px;
-  display: flex;
-  flex-direction: column;
-  min-height: 270px;
-  padding: 24px;
-}
-
-.testimonial-card blockquote {
-  color: var(--deep-navy);
-  flex: 1;
-  font-size: 1.05rem;
-  font-style: normal;
-  font-weight: 600;
-  letter-spacing: 0;
-  line-height: 1.65;
-  margin: 0 0 26px;
-}
-
-.testimonial-attribution {
-  align-items: center;
-  color: var(--deep-navy);
-  display: flex;
-  font-size: 0.85rem;
-  gap: 12px;
-}
-
-.testimonial-attribution strong,
-.testimonial-attribution small {
-  display: block;
-}
-
-.testimonial-attribution strong {
-  font-weight: 700;
-}
-
-.testimonial-attribution small {
-  color: var(--muted);
-  font-size: 0.75rem;
-  line-height: 1.4;
-  margin-top: 2px;
-}
-
-.testimonial-avatar {
-  align-items: center;
-  background: var(--navy);
-  border-radius: 50%;
-  color: #fff;
-  display: flex;
-  flex: 0 0 auto;
-  font-size: 0.78rem;
-  font-weight: 700;
-  height: 38px;
-  justify-content: center;
-  width: 38px;
-}
-
-.testimonial-disclaimer {
-  align-items: flex-start;
-  color: var(--muted);
-  display: flex;
-  font-size: 0.82rem;
-  gap: 8px;
-  line-height: 1.55;
-  margin: 18px 0 0;
-}
-
-.testimonial-disclaimer .line-icon {
-  color: var(--orange);
-  flex: 0 0 auto;
-  font-size: 0.95rem;
-}
-
-.quote-mark {
-  color: var(--orange);
-  font-family: Georgia, serif;
-  font-size: 6rem;
-  height: 58px;
-  line-height: 1;
-}
-
-.proof > blockquote {
-  color: var(--deep-navy);
-  font-size: clamp(2rem, 3.8vw, 2.8rem);
-  font-style: normal;
-  font-weight: 700;
-  letter-spacing: -0.5px;
-  line-height: 1.2;
-  margin: 24px 0;
-  max-width: 850px;
-}
-
-.quote-byline {
-  align-items: center;
-  color: var(--muted);
-  display: flex;
-  font-size: 0.82rem;
-  gap: 14px;
-}
-
-.quote-byline span:first-child {
-  align-items: center;
-  background: var(--navy);
-  border-radius: 50%;
-  color: #fff;
-  display: flex;
-  font-size: 0.9rem;
-  font-weight: 700;
-  height: 36px;
-  justify-content: center;
-  width: 36px;
-}
-
-.proof-foot {
-  border-top: 1px solid var(--line);
-  margin-top: 44px;
-  padding-top: 18px;
-}
-
-.proof .section-kicker {
-  color: var(--orange);
-  margin: 0;
-}
-
-.proof-pulse {
-  align-items: center;
-  color: var(--muted);
-  display: flex;
-  font-size: 0.78rem;
-  gap: 12px;
-}
-
-.proof-pulse i {
-  background: var(--orange);
-  display: block;
-  height: 4px;
-  transition: width 1s ease;
-  width: 70px;
-}
-
 .software {
   background: var(--mist);
   text-align: center;
@@ -1458,8 +1275,7 @@ footer a:not(.brand):hover {
 
   .service-grid,
   .industry-grid,
-  .addons-grid,
-  .testimonial-grid {
+  .addons-grid {
     grid-template-columns: repeat(2, minmax(0, 1fr));
   }
 
@@ -1628,14 +1444,7 @@ footer a:not(.brand):hover {
 
   .service-grid,
   .industry-grid,
-  .addons-grid,
-  .testimonial-grid {
-    grid-template-columns: 1fr;
-  }
-
-  .testimonials-heading {
-    align-items: start;
-    gap: 18px;
+  .addons-grid {
     grid-template-columns: 1fr;
   }
 
@@ -1658,17 +1467,6 @@ footer a:not(.brand):hover {
 
   .addons {
     padding: 24px 18px;
-  }
-
-  .proof > blockquote {
-    font-size: 2rem;
-  }
-
-  .proof-foot {
-    align-items: flex-start;
-    flex-direction: column;
-    gap: 14px;
-    margin-top: 34px;
   }
 
   .software-list {

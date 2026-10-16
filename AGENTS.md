@@ -10,6 +10,10 @@ This block is written and re-added by `next dev` — verify at `node_modules/nex
 
 # Development history
 
+## 2026-10-16 — Removal of unverified testimonial drafts
+
+The landing page had three fictional contractor quotes shown as draft testimonials, plus generic owner-role labels, a Testimonials navigation link, and notices explaining that the copy needed client approval. Because the quotes were not based on actual client statements, this revision removes the cards and all associated draft/disclaimer copy rather than presenting them as genuine reviews. The Testimonials link and unused testimonial styling were also removed, and the remaining section numbers were adjusted so the page flows from monthly bookkeeping to software fit and the final call to action. The service, pricing, inquiry, and contact content remains in place. Verified client feedback can be added when real, approved wording and attribution are available.
+
 ## 2026-10-16 — Discovery-call inquiry email notifications
 
 The discovery-call form previously saved inquiries to Neon but did not notify the site owner. The inquiry route now sends a plain-text notification through the Resend integration already configured on the Vercel project, after the database insert succeeds. It reads the existing server-side `Messaging_RESEND_API_KEY` and `Messaging_RESEND_EMAIL_DOMAIN` values, sends to the site footer contact address (`marcus@leagueofledgers.com`) by default, and allows the recipient to be overridden with `INQUIRY_NOTIFICATION_EMAIL`. The notification includes the submitter’s name, work email, message, and inquiry ID, and uses an idempotency key based on that database ID.
