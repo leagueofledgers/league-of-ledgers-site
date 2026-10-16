@@ -10,6 +10,10 @@ This block is written and re-added by `next dev` — verify at `node_modules/nex
 
 # Development history
 
+## 2026-10-16 — Neon integration connection-key alignment
+
+The Vercel Neon resource `neon-chestnut-chair` is connected to `league-of-ledgers-site` for Production and Preview. Its secret variables use the `League_` prefix, including `League_DATABASE_URL`, while the inquiry route previously checked only `DATABASE_URL`; this mismatch caused the form’s “DATABASE_URL is not configured” response even though Neon was attached. The route now prefers the existing `DATABASE_URL` when present and falls back to the integration-managed `League_DATABASE_URL`, preserving local setup compatibility without copying or exposing the database credential. The README now documents both supported keys. The Neon variables were added after the latest production deployment, so a deployment built after this code change is required before production can use the connection. Standalone TypeScript checking passed after removing an extra duplicate generated Next.js route-types file; `npm run build` stalled twice without producing output in this workspace, leaving the Vercel build as the remaining deployment check. The route still creates the `inquiries` table on the first valid POST, so the Neon database role must be allowed to create it.
+
 ## 2026-10-16 — Comprehensive website content and service-alignment revision
 
 The published League of Ledgers site was audited against the intended U.S. bookkeeping positioning for HVAC, MEP, and home-service contractors. The earlier implementation had strong visual branding but mixed service names, package coverage, and add-on boundaries: job costing appeared broader than the tiers supported, existing field-service reconciliation was not clearly separated from new integration work, AP/AR and payroll language could imply more operational ownership than intended, and the page used a broad money-back guarantee, historical performance numbers, a client testimonial, and a dashboard presented as live without visible qualification.

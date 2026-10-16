@@ -3,10 +3,11 @@ import { Pool } from "pg";
 
 export const runtime = "nodejs";
 
-const pool = new Pool({ connectionString: process.env.DATABASE_URL, ssl: { rejectUnauthorized: false } });
+const databaseUrl = process.env.DATABASE_URL || process.env.League_DATABASE_URL;
+const pool = new Pool({ connectionString: databaseUrl, ssl: { rejectUnauthorized: false } });
 
 export async function POST(request: Request) {
-  if (!process.env.DATABASE_URL) {
+  if (!databaseUrl) {
     return NextResponse.json({ error: "DATABASE_URL is not configured." }, { status: 503 });
   }
 
