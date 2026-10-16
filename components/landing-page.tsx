@@ -1,6 +1,6 @@
 "use client";
 
-import { useState } from "react";
+import { useEffect, useRef, useState, type FormEvent } from "react";
 
 const calendarUrl = "https://calendar.app.google/NKgF1z3srrzwcJ1NA";
 
@@ -46,6 +46,12 @@ const addOns = [
   ["1099 Preparation & Filing Support", "Review vendor records, validate available tax information, and prepare or coordinate required forms under a separately agreed scope."],
 ] as const;
 
+const testimonials = [
+  ["\"We finally have one clear monthly financial picture to work from instead of a pile of disconnected reports.\"", "HVAC contractor owner", "Draft testimonial — pending client approval", "HV"],
+  ["\"The close process helps us see where each job stands before the next decision is already made for us.\"", "Plumbing business owner", "Draft testimonial — pending client approval", "PL"],
+  ["\"Our books are easier to understand, easier to review, and much more useful in the day-to-day operation.\"", "Electrical contractor owner", "Draft testimonial — pending client approval", "EL"],
+] as const;
+
 const software = ["QuickBooks Online", "ServiceTitan", "Housecall Pro", "Gusto", "ADP Payroll", "Xero", "Slack", "Google Workspace"];
 
 function Mark({ type }: { type: "spark" | "arrow" | "grid" | "check" }) {
@@ -60,7 +66,67 @@ export default function LandingPage() {
   const [modalOpen, setModalOpen] = useState(false);
   const [submitted, setSubmitted] = useState(false);
   const [formError, setFormError] = useState("");
+  const [isSubmitting, setIsSubmitting] = useState(false);
+  const closeButtonRef = useRef<HTMLButtonElement>(null);
   const closeMenu = () => setMenuOpen(false);
+  const openModal = () => {
+    setMenuOpen(false);
+    setSubmitted(false);
+    setFormError("");
+    setIsSubmitting(false);
+    setModalOpen(true);
+  };
+  const closeModal = () => {
+    setModalOpen(false);
+    setSubmitted(false);
+    setFormError("");
+    setIsSubmitting(false);
+  };
+
+  useEffect(() => {
+    if (!modalOpen) return;
+
+    const previouslyFocused = document.activeElement as HTMLElement | null;
+    closeButtonRef.current?.focus();
+    const handleKeyDown = (event: KeyboardEvent) => {
+      if (event.key === "Escape") closeModal();
+    };
+
+    document.addEventListener("keydown", handleKeyDown);
+    return () => {
+      document.removeEventListener("keydown", handleKeyDown);
+      previouslyFocused?.focus();
+    };
+  }, [modalOpen]);
+
+  const handleSubmit = async (event: FormEvent<HTMLFormElement>) => {
+    event.preventDefault();
+    if (isSubmitting) return;
+
+    setFormError("");
+    setIsSubmitting(true);
+
+    try {
+      const form = event.currentTarget;
+      const response = await fetch("/api/inquiries", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify(Object.fromEntries(new FormData(form))),
+      });
+
+      if (!response.ok) {
+        const result = await response.json().catch(() => null);
+        setFormError(result?.error ?? "Something went wrong. Please try again.");
+        return;
+      }
+
+      setSubmitted(true);
+    } catch {
+      setFormError("We couldn’t send your inquiry. Please check your connection and try again.");
+    } finally {
+      setIsSubmitting(false);
+    }
+  };
 
   return (
     <main>
@@ -69,14 +135,15 @@ export default function LandingPage() {
           <img className="brand-logo" src="/league-of-ledgers-logo.jpg" alt="" aria-hidden="true" />
           <span>League of <b>Ledgers</b></span>
         </a>
-        <button className="menu-toggle" aria-expanded={menuOpen} aria-label="Toggle navigation" onClick={() => setMenuOpen(!menuOpen)}>
+        <button type="button" className="menu-toggle" aria-controls="primary-navigation" aria-expanded={menuOpen} aria-label="Toggle navigation" onClick={() => setMenuOpen(!menuOpen)}>
           <span /><span /><span />
         </button>
-        <nav className={menuOpen ? "nav-links is-open" : "nav-links"}>
+        <nav id="primary-navigation" className={menuOpen ? "nav-links is-open" : "nav-links"}>
           <a href="#services" onClick={closeMenu}>Services</a>
           <a href="#packages" onClick={closeMenu}>Packages</a>
           <a href="#proof" onClick={closeMenu}>Why us</a>
-          <button className="button button-small button-gold" onClick={() => { closeMenu(); setModalOpen(true); }}>Book a Free Discovery Call <Mark type="arrow" /></button>
+          <a href="#testimonials" onClick={closeMenu}>Testimonials</a>
+          <button type="button" className="button button-small button-gold" onClick={openModal}>Book a Free Discovery Call <Mark type="arrow" /></button>
         </nav>
       </header>
 
@@ -86,7 +153,7 @@ export default function LandingPage() {
           <h1>Numbers that <em>move</em> your business forward.</h1>
           <p className="hero-lede">Clear books. Better decisions. More room to focus on the work that built your business.</p>
           <div className="hero-actions">
-            <button className="button button-dark" onClick={() => setModalOpen(true)}>Book a Free Discovery Call <Mark type="arrow" /></button>
+            <button type="button" className="button button-dark" onClick={openModal}>Book a Free Discovery Call <Mark type="arrow" /></button>
             <a className="text-link" href="#services">See how we help <Mark type="arrow" /></a>
           </div>
           <div className="hero-metrics">
@@ -151,7 +218,7 @@ export default function LandingPage() {
                 <th scope="row" />
                 {pricingPlans.map((plan) => <td key={plan.name}>
                   <strong className="plan-price">From {plan.price}<small>/mo</small></strong>
-                  <button className="button button-gold audit-button" onClick={() => setModalOpen(true)}>Book a Free Discovery Call <Mark type="arrow" /></button>
+                  <button type="button" className="button button-gold audit-button" onClick={openModal}>Book a Free Discovery Call <Mark type="arrow" /></button>
                 </td>)}
               </tr>
             </tfoot>
@@ -165,15 +232,21 @@ export default function LandingPage() {
         </div>
       </section>
 
-      <section className="proof section-pad"><div className="quote-mark">“</div><blockquote>Clean books give contractors a clearer next decision.</blockquote><div className="quote-byline"><span>LO</span><span>Illustrative practice statement — not a client testimonial</span></div><div className="proof-foot"><span className="section-kicker">05 / Our approach</span><div className="proof-pulse"><i aria-hidden="true" /><span>Clarity / built into every close</span></div></div></section>
+      <section className="proof section-pad" id="testimonials">
+        <div className="section-kicker">05 / Client perspectives</div>
+        <div className="testimonials-heading"><h2>Clearer books, <em>better decisions.</em></h2><p>These testimonial drafts are written for review and should be replaced with approved client words and attribution before publication.</p></div>
+        <div className="testimonial-grid">{testimonials.map(([quote, role, label, initials]) => <article className="testimonial-card" key={role}><blockquote>{quote}</blockquote><div className="testimonial-attribution"><span className="testimonial-avatar">{initials}</span><span><strong>{role}</strong><small>{label}</small></span></div></article>)}</div>
+        <p className="testimonial-disclaimer"><Mark type="check" /> Draft copy only — replace each card with verified client feedback before presenting it as a testimonial.</p>
+        <div className="proof-foot"><span className="section-kicker">Our approach</span><div className="proof-pulse"><i aria-hidden="true" /><span>Clarity / built into every close</span></div></div>
+      </section>
 
       <section className="software section-pad"><div className="section-kicker">06 / Fits your stack</div><h2>Already fluent in <em>your tools.</em></h2><p>Keep the systems you rely on. We make the numbers inside them work harder. Active connections and export-based reconciliation depend on your current setup and agreed scope.</p><div className="software-list">{software.map((item) => <span key={item}><Mark type="grid" /> {item}</span>)}</div></section>
 
-      <section className="cta-section section-pad"><div className="cta-inner"><div className="section-kicker">07 / Your next clear move</div><h2>Ready to stop guessing?</h2><p>Bring us the messy books, the seasonal swings, and the big next step. We’ll bring clarity.</p><button className="button button-gold" onClick={() => setModalOpen(true)}>Book a Free Discovery Call <Mark type="arrow" /></button></div></section>
+      <section className="cta-section section-pad"><div className="cta-inner"><div className="section-kicker">07 / Your next clear move</div><h2>Ready to stop guessing?</h2><p>Bring us the messy books, the seasonal swings, and the big next step. We’ll bring clarity.</p><button type="button" className="button button-gold" onClick={openModal}>Book a Free Discovery Call <Mark type="arrow" /></button></div></section>
 
       <footer><a className="brand" href="#top"><img className="brand-logo" src="/league-of-ledgers-logo.jpg" alt="" aria-hidden="true" /><span>League of <b>Ledgers</b></span></a><span>© 2026 League of Ledgers</span><a href="mailto:marcus@leagueofledgers.com">marcus@leagueofledgers.com</a></footer>
 
-      {modalOpen && <div className="modal-backdrop" role="presentation" onMouseDown={(event) => { if (event.target === event.currentTarget) setModalOpen(false); }}><div className="modal" role="dialog" aria-modal="true" aria-labelledby="modal-title"><button className="modal-close" aria-label="Close booking form" onClick={() => setModalOpen(false)}>×</button>{submitted ? <div className="success-state"><span className="success-icon">✓</span><h2>Message received.</h2><p>We’ll be in touch shortly. You can also choose a time directly on our calendar.</p><a className="button button-dark" href={calendarUrl} target="_blank" rel="noreferrer">Open calendar <Mark type="arrow" /></a></div> : <><div className="section-kicker">Free discovery call</div><h2 id="modal-title">Book a Free Discovery Call.</h2><p>Share a few details and we’ll shape the right next conversation.</p><form onSubmit={async (event) => { event.preventDefault(); setFormError(""); const form = event.currentTarget; const response = await fetch("/api/inquiries", { method: "POST", headers: { "Content-Type": "application/json" }, body: JSON.stringify(Object.fromEntries(new FormData(form))) }); if (response.ok) { setSubmitted(true); } else { const result = await response.json().catch(() => null); setFormError(result?.error ?? "Something went wrong. Please try again."); } }}><label>Name<input required name="name" placeholder="Your name" /></label><label>Work email<input required type="email" name="email" placeholder="you@company.com" /></label><label>What do you need help with?<textarea required name="message" placeholder="A quick note about your books or next step" rows={3} /></label>{formError && <p className="form-error" role="alert">{formError}</p>}<button className="button button-gold full-width" type="submit">Send inquiry <Mark type="arrow" /></button></form></>}</div></div>}
+      {modalOpen && <div className="modal-backdrop" role="presentation" onMouseDown={(event) => { if (event.target === event.currentTarget) closeModal(); }}><div className="modal" role="dialog" aria-modal="true" aria-labelledby="modal-title" aria-describedby="modal-description"><button type="button" ref={closeButtonRef} className="modal-close" aria-label="Close booking form" onClick={closeModal}>×</button>{submitted ? <div className="success-state"><span className="success-icon">✓</span><h2 id="modal-title">Message received.</h2><p id="modal-description">We’ll be in touch shortly. You can also choose a time directly on our calendar.</p><a className="button button-dark" href={calendarUrl} target="_blank" rel="noreferrer">Open calendar <Mark type="arrow" /></a></div> : <><div className="section-kicker">Free discovery call</div><h2 id="modal-title">Book a Free Discovery Call.</h2><p id="modal-description">Share a few details and we’ll shape the right next conversation.</p><form onSubmit={handleSubmit}><label htmlFor="inquiry-name">Name<input id="inquiry-name" required autoComplete="name" name="name" placeholder="Your name" /></label><label htmlFor="inquiry-email">Work email<input id="inquiry-email" required autoComplete="email" type="email" name="email" placeholder="you@company.com" /></label><label htmlFor="inquiry-message">What do you need help with?<textarea id="inquiry-message" required name="message" placeholder="A quick note about your books or next step" rows={3} /></label>{formError && <p className="form-error" role="alert" aria-live="assertive">{formError}</p>}<button className="button button-gold full-width" type="submit" disabled={isSubmitting} aria-busy={isSubmitting}>{isSubmitting ? "Sending…" : <>Send inquiry <Mark type="arrow" /></>}</button></form></>}</div></div>}
     </main>
   );
 }
