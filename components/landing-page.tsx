@@ -14,9 +14,9 @@ const services = [
 ] as const;
 
 const pricingPlans = [
-  { name: "Apprentice", price: "$600", description: "For owner-operators getting their books dialed in.", volume: "Typically 1–3 trucks under ~$750K revenue" },
-  { name: "Journeyman", price: "$1,000", description: "For established shops running multiple crews who need business clarity.", volume: "Typically 4–6 trucks doing $750K–$2M revenue", popular: true },
-  { name: "Master", price: "$1,650", description: "For operations that want full command of their numbers.", volume: "Typically 7+ trucks doing $2M+ revenue" },
+  { name: "Apprentice", price: "$599", description: "For owner-operators getting their books dialed in.", volume: "Typically 1–3 trucks under ~$750K revenue" },
+  { name: "Journeyman", price: "$999", description: "For established shops running multiple crews who need business clarity.", volume: "Typically 4–6 trucks doing $750K–$2M revenue", popular: true },
+  { name: "Master", price: "$1,499", description: "For operations that want full command of their numbers.", volume: "Typically 7+ trucks doing $2M+ revenue" },
 ];
 
 const pricingFeatures = [
@@ -29,21 +29,8 @@ const pricingFeatures = [
   ["Dedicated bookkeeper", "Included", "Included", "Included"],
   ["Monthly financial statements", "Standard", "Enhanced", "Enhanced"],
   ["Month-end close", "Included", "Included", "Included"],
-  ["Basic job-costing reporting", "Add-on", "Included*", "Included*"],
-  ["Detailed job profitability", "Add-on", "Add-on", "Included*"],
   ["KPI reporting", "Basic", "Enhanced", "Advanced"],
   ["Financial review meeting", "Quarterly", "Quarterly", "Monthly"],
-  ["Payroll processing support", "Add-on", "Add-on", "Add-on"],
-  ["Hands-on AP/AR management", "Add-on", "Add-on", "Add-on"],
-] as const;
-
-const addOns = [
-  ["Accounts Payable & Receivable Management", "Vendor bill and customer invoice entry, aging monitoring, payment scheduling support, and follow-up. Payment execution stays with the client."],
-  ["Payroll Processing & Reconciliation", "Payroll preparation support, register review, journal entries, and reconciliation between the payroll platform, QuickBooks, and field-service data. Tax filings and remittances follow the provider or agreed scope."],
-  ["Cleanup & Catch-Up Bookkeeping", "Correct historical transactions, reconcile outstanding accounts, and restore reliable financial records before ongoing monthly work begins."],
-  ["FSM Integration Setup & Cleanup", "Configure supported connections, review account mappings, resolve sync discrepancies, and reconcile historical transactions for ServiceTitan, Housecall Pro, Jobber, or another supported platform."],
-  ["Advanced Job Costing", "Analyze profitability by job, labor category, equipment, or service line using the operational and financial data available in the agreed systems."],
-  ["1099 Preparation & Filing Support", "Review vendor records, validate available tax information, and prepare or coordinate required forms under a separately agreed scope."],
 ] as const;
 
 const software = ["QuickBooks Online", "ServiceTitan", "Housecall Pro", "Gusto", "ADP Payroll", "Xero", "Slack", "Google Workspace"];
@@ -143,7 +130,7 @@ export default function LandingPage() {
             <tbody>
               {pricingFeatures.map(([feature, ...values]) => <tr key={feature}>
                 <th scope="row">{feature}</th>
-                {values.map((value, index) => <td key={`${feature}-${index}`} className={value.startsWith("Included") ? "included" : value === "Add-on" ? "add-on" : value ? "" : "not-included"}>{value || "—"}</td>)}
+                {values.map((value, index) => <td key={`${feature}-${index}`} className={value.startsWith("Included") ? "included" : value ? "" : "not-included"}>{value || "—"}</td>)}
               </tr>)}
             </tbody>
             <tfoot>
@@ -158,11 +145,7 @@ export default function LandingPage() {
           </table>
         </div>
         <p className="pricing-footnote">* Job-costing coverage is subject to source-data quality, system capabilities, and agreed reporting scope.</p>
-        <p className="pricing-note"><Mark type="check" /> Starting prices reflect transaction volume, account complexity, connected systems, reporting requirements, and the condition of your existing books. Final pricing is confirmed after an initial review. <span>·</span> No hourly billing.</p>
-        <div className="addons">
-          <div className="addons-heading"><h3>Optional services, scoped to your operation</h3><p>Not every shop needs these services every month. We’ll scope the right combination based on volume, systems, data quality, and the level of ownership you want to retain.</p></div>
-          <div className="addons-grid">{addOns.map(([title, description]) => <article key={title}><h4>{title}</h4><p>{description}</p></article>)}</div>
-        </div>
+        <p className="pricing-note"><Mark type="check" /><span>Starting prices reflect transaction volume, account complexity, connected systems, reporting requirements, and the condition of your existing books. Final pricing is confirmed after an initial review.</span><span aria-hidden="true">·</span><span>No hourly billing.</span></p>
       </section>
 
       <section className="proof section-pad"><div className="quote-mark">“</div><blockquote>Clean books give contractors a clearer next decision.</blockquote><div className="quote-byline"><span>LO</span><span>Illustrative practice statement — not a client testimonial</span></div><div className="proof-foot"><span className="section-kicker">05 / Our approach</span><div className="proof-pulse"><i aria-hidden="true" /><span>Clarity / built into every close</span></div></div></section>
@@ -171,7 +154,7 @@ export default function LandingPage() {
 
       <section className="cta-section section-pad"><div className="cta-inner"><div className="section-kicker">07 / Your next clear move</div><h2>Ready to stop guessing?</h2><p>Bring us the messy books, the seasonal swings, and the big next step. We’ll bring clarity.</p><button className="button button-gold" onClick={() => setModalOpen(true)}>Book a Free Discovery Call <Mark type="arrow" /></button></div></section>
 
-      <footer><a className="brand" href="#top"><img className="brand-logo" src="/league-of-ledgers-logo.svg" alt="" aria-hidden="true" /><span>League of <b>Ledgers</b></span></a><span>© 2026 League of Ledgers</span><a href="mailto:hello@leagueofledgers.com">hello@leagueofledgers.com</a></footer>
+      <footer><a className="brand" href="#top"><img className="brand-logo" src="/league-of-ledgers-logo.svg" alt="" aria-hidden="true" /><span>League of <b>Ledgers</b></span></a><span>© 2026 League of Ledgers</span><a href="mailto:marcus@leagueofledgers.com">marcus@leagueofledgers.com</a></footer>
 
       {modalOpen && <div className="modal-backdrop" role="presentation" onMouseDown={(event) => { if (event.target === event.currentTarget) setModalOpen(false); }}><div className="modal" role="dialog" aria-modal="true" aria-labelledby="modal-title"><button className="modal-close" aria-label="Close booking form" onClick={() => setModalOpen(false)}>×</button>{submitted ? <div className="success-state"><span className="success-icon">✓</span><h2>Message received.</h2><p>We’ll be in touch shortly. You can also choose a time directly on our calendar.</p><a className="button button-dark" href={calendarUrl} target="_blank" rel="noreferrer">Open calendar <Mark type="arrow" /></a></div> : <><div className="section-kicker">Free discovery call</div><h2 id="modal-title">Book a Free Discovery Call.</h2><p>Share a few details and we’ll shape the right next conversation.</p><form onSubmit={async (event) => { event.preventDefault(); setFormError(""); const form = event.currentTarget; const response = await fetch("/api/inquiries", { method: "POST", headers: { "Content-Type": "application/json" }, body: JSON.stringify(Object.fromEntries(new FormData(form))) }); if (response.ok) { setSubmitted(true); } else { const result = await response.json().catch(() => null); setFormError(result?.error ?? "Something went wrong. Please try again."); } }}><label>Name<input required name="name" placeholder="Your name" /></label><label>Work email<input required type="email" name="email" placeholder="you@company.com" /></label><label>What do you need help with?<textarea required name="message" placeholder="A quick note about your books or next step" rows={3} /></label>{formError && <p className="form-error" role="alert">{formError}</p>}<button className="button button-gold full-width" type="submit">Send inquiry <Mark type="arrow" /></button></form></>}</div></div>}
     </main>
