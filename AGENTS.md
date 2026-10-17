@@ -10,6 +10,10 @@ This block is written and re-added by `next dev` — verify at `node_modules/nex
 
 # Development history
 
+## 2026-10-17 — Vercel Web Analytics integration
+
+Installed `@vercel/analytics` 2.0.1 and added its Next.js `Analytics` component to the shared root layout so page visits can be collected across the site. The component is rendered inside the root `<body>` after page content, following the Vercel integration guidance. This affects `package.json`, `package-lock.json`, `app/layout.tsx`, and this history file. The Vercel project must also have Web Analytics enabled in its dashboard before data will appear; that dashboard setting has not been verified here.
+
 ## 2026-10-17 — Footer email and social icons
 
 Updated the footer to replace the visible email address with a Gmail-style icon linked to the existing public `mailto:marcus@leagueofledgers.com` contact. Added Facebook, Instagram, and LinkedIn brand icons alongside it, but left those three as non-link graphics because the owner has not provided profile URLs. The icons are inline SVGs, so this change adds no external icon package or third-party asset dependency. Footer spacing and focus styling were added in `app/globals.css`; the existing logo, copyright text, colors, and responsive stacking remain intact. No social account URL or destination was invented.
