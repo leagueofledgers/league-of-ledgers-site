@@ -274,7 +274,40 @@ export default function LandingPage() {
 
       <section className="cta-section section-pad"><div className="cta-inner"><div className="section-kicker">07 / Your next clear move</div><h2>Ready to stop guessing?</h2><p>Bring us the messy books, the seasonal swings, and the big next step. We’ll bring clarity.</p><button type="button" className="button button-gold" onClick={openModal}>Book a Free Discovery Call <Mark type="arrow" /></button></div></section>
 
-      <footer><a className="brand" href="#top"><img className="brand-logo" src="/league-of-ledgers-logo.jpg" alt="" aria-hidden="true" /><span>League of <b>Ledgers</b></span></a><span>© 2026 League of Ledgers</span><a href="mailto:marcus@leagueofledgers.com">marcus@leagueofledgers.com</a></footer>
+      <footer>
+        <a className="brand" href="#top">
+          <img className="brand-logo" src="/league-of-ledgers-logo.jpg" alt="" aria-hidden="true" />
+          <span>League of <b>Ledgers</b></span>
+        </a>
+        <span>© 2026 League of Ledgers</span>
+        <div className="footer-socials">
+          <a className="footer-social-icon" href="mailto:marcus@leagueofledgers.com" aria-label="Email marcus@leagueofledgers.com">
+            <svg viewBox="0 0 48 48" aria-hidden="true" focusable="false">
+              <path d="M6.5 14v20.5" fill="none" stroke="#4285f4" strokeWidth="5" strokeLinecap="round" />
+              <path d="M6.5 14 24 27.2 41.5 14" fill="none" stroke="#ea4335" strokeWidth="5" strokeLinecap="round" strokeLinejoin="round" />
+              <path d="M41.5 14v20.5" fill="none" stroke="#34a853" strokeWidth="5" strokeLinecap="round" />
+              <path d="M6.5 34.5h35" fill="none" stroke="#fbbc04" strokeWidth="5" strokeLinecap="round" />
+            </svg>
+          </a>
+          <span className="footer-social-icon" role="img" aria-label="Facebook">
+            <svg viewBox="0 0 48 48" aria-hidden="true" focusable="false">
+              <path d="M27.3 43V25h6.1l.9-7h-7v-4.5c0-2 .6-3.3 3.5-3.3h3.8V4c-.7-.1-3-.3-5.8-.3-5.7 0-9.6 3.5-9.6 9.9V18h-6.4v7h6.4v18h8.1Z" fill="currentColor" />
+            </svg>
+          </span>
+          <span className="footer-social-icon" role="img" aria-label="Instagram">
+            <svg viewBox="0 0 48 48" aria-hidden="true" focusable="false">
+              <rect x="7" y="7" width="34" height="34" rx="10" fill="none" stroke="currentColor" strokeWidth="3.5" />
+              <circle cx="24" cy="24" r="8" fill="none" stroke="currentColor" strokeWidth="3.5" />
+              <circle cx="34.5" cy="13.8" r="2.3" fill="currentColor" />
+            </svg>
+          </span>
+          <span className="footer-social-icon" role="img" aria-label="LinkedIn">
+            <svg viewBox="0 0 48 48" aria-hidden="true" focusable="false">
+              <path d="M10.5 17.5h7V39h-7V17.5Zm3.5-3.2a4.1 4.1 0 1 1 0-8.2 4.1 4.1 0 0 1 0 8.2ZM21.5 17.5h6.7v2.9h.1c.9-1.7 3.2-3.5 6.6-3.5 7.1 0 8.4 4.7 8.4 10.8V39h-7V29c0-2.4 0-5.5-3.4-5.5s-3.9 2.6-3.9 5.3V39h-7.1V17.5Z" fill="currentColor" />
+            </svg>
+          </span>
+        </div>
+      </footer>
 
       {modalOpen && <div className="modal-backdrop" role="presentation" onMouseDown={(event) => { if (event.target === event.currentTarget) closeModal(); }}><div className="modal" role="dialog" aria-modal="true" aria-labelledby="modal-title" aria-describedby="modal-description"><button type="button" ref={closeButtonRef} className="modal-close" aria-label="Close booking form" onClick={closeModal}>×</button>{submitted ? <div className="success-state"><span className="success-icon">✓</span><h2 id="modal-title">Message received.</h2><p id="modal-description">We’ll be in touch shortly. You can also choose a time directly on our calendar.</p><a className="button button-dark" href={calendarUrl} target="_blank" rel="noreferrer">Open calendar <Mark type="arrow" /></a></div> : <><div className="section-kicker">Free discovery call</div><h2 id="modal-title">Book a Free Discovery Call.</h2><p id="modal-description">Share a few details and we’ll shape the right next conversation.</p><form onSubmit={handleSubmit}><label htmlFor="inquiry-name">Name<input id="inquiry-name" required autoComplete="name" name="name" placeholder="Your name" /></label><label htmlFor="inquiry-email">Work email<input id="inquiry-email" required autoComplete="email" type="email" name="email" placeholder="you@company.com" /></label><label htmlFor="inquiry-message">What do you need help with?<textarea id="inquiry-message" required name="message" placeholder="A quick note about your books or next step" rows={3} /></label>{formError && <p className="form-error" role="alert" aria-live="assertive">{formError}</p>}<button className="button button-gold full-width" type="submit" disabled={isSubmitting} aria-busy={isSubmitting}>{isSubmitting ? "Sending…" : <>Send inquiry <Mark type="arrow" /></>}</button></form></>}</div></div>}
     </main>

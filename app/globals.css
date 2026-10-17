@@ -1201,6 +1201,47 @@ footer a:not(.brand):hover {
   color: #fff;
 }
 
+.footer-socials {
+  align-items: center;
+  display: flex;
+  gap: 16px;
+}
+
+.footer-social-icon {
+  align-items: center;
+  color: #cbd5e1;
+  display: inline-flex;
+  height: 32px;
+  justify-content: center;
+  width: 32px;
+}
+
+.footer-socials a.footer-social-icon {
+  border-radius: 50%;
+  transition: color 160ms ease, transform 160ms ease;
+}
+
+.footer-socials a.footer-social-icon:hover {
+  color: #fff;
+  transform: translateY(-2px);
+}
+
+.footer-socials a.footer-social-icon:focus-visible {
+  outline: 2px solid var(--gold);
+  outline-offset: 3px;
+}
+
+.footer-social-icon svg {
+  display: block;
+  height: 25px;
+  width: 25px;
+}
+
+.footer-socials a.footer-social-icon svg {
+  height: 27px;
+  width: 27px;
+}
+
 .modal-backdrop {
   align-items: center;
   background: rgb(11 30 46 / 68%);

@@ -10,6 +10,10 @@ This block is written and re-added by `next dev` — verify at `node_modules/nex
 
 # Development history
 
+## 2026-10-17 — Footer email and social icons
+
+Updated the footer to replace the visible email address with a Gmail-style icon linked to the existing public `mailto:marcus@leagueofledgers.com` contact. Added Facebook, Instagram, and LinkedIn brand icons alongside it, but left those three as non-link graphics because the owner has not provided profile URLs. The icons are inline SVGs, so this change adds no external icon package or third-party asset dependency. Footer spacing and focus styling were added in `app/globals.css`; the existing logo, copyright text, colors, and responsive stacking remain intact. No social account URL or destination was invented.
+
 ## 2026-10-16 — Search metadata and crawler discovery
 
 The SEO source audit found that the single-page site had only a basic title and description, no canonical URL, no social sharing metadata, and no sitemap or robots file. Its home-page H1 was also brand-oriented without naming the bookkeeping service. The Vercel project confirms `leagueofledgers.com` permanently redirects to `www.leagueofledgers.com`, so the www host is now used consistently as the canonical domain.
