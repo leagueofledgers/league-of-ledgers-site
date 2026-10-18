@@ -1,10 +1,9 @@
 import { NextResponse } from "next/server";
-import { Pool } from "pg";
+import { randomUUID } from "node:crypto";
+import { sendInquiryToHubSpot } from "./hubspot";
 
 export const runtime = "nodejs";
 
-const databaseUrl = process.env.DATABASE_URL || process.env.League_DATABASE_URL;
-const pool = new Pool({ connectionString: databaseUrl, ssl: { rejectUnauthorized: false } });
 const resendApiKey = process.env.Messaging_RESEND_API_KEY;
 const resendEmailDomain = process.env.Messaging_RESEND_EMAIL_DOMAIN?.trim().replace(/^@+/, "");
 const notificationEmail = process.env.INQUIRY_NOTIFICATION_EMAIL?.trim() || "marcus@leagueofledgers.com";
@@ -21,13 +20,14 @@ async function sendInquiryNotification({
   message: string;
 }) {
   if (!resendApiKey || !resendEmailDomain) {
-    console.error("Inquiry was saved, but its email notification was skipped because Resend is not configured.");
+    console.error("Inquiry email notification was skipped because Resend is not configured.");
     return false;
   }
 
   try {
     const response = await fetch("https://api.resend.com/emails", {
       method: "POST",
+      signal: AbortSignal.timeout(8000),
       headers: {
         Authorization: `Bearer ${resendApiKey}`,
         "Content-Type": "application/json",
@@ -52,22 +52,18 @@ async function sendInquiryNotification({
     });
 
     if (!response.ok) {
-      console.error(`Inquiry was saved, but Resend rejected its email notification (HTTP ${response.status}).`);
+      console.error(`Resend rejected the inquiry email notification (HTTP ${response.status}).`);
       return false;
     }
 
     return true;
   } catch {
-    console.error("Inquiry was saved, but its Resend email notification request failed.");
+    console.error("Inquiry email notification request failed.");
     return false;
   }
 }
 
 export async function POST(request: Request) {
-  if (!databaseUrl) {
-    return NextResponse.json({ error: "DATABASE_URL is not configured." }, { status: 503 });
-  }
-
   try {
     const body = await request.json();
     const name = typeof body.name === "string" ? body.name.trim() : "";
@@ -78,16 +74,18 @@ export async function POST(request: Request) {
       return NextResponse.json({ error: "Name, email, and message are required." }, { status: 400 });
     }
 
-    await pool.query(`CREATE TABLE IF NOT EXISTS inquiries (id BIGSERIAL PRIMARY KEY, name TEXT NOT NULL, email TEXT NOT NULL, message TEXT NOT NULL, created_at TIMESTAMPTZ NOT NULL DEFAULT NOW())`);
-    const result = await pool.query<{ id: string }>(
-      "INSERT INTO inquiries (name, email, message) VALUES ($1, $2, $3) RETURNING id",
-      [name, email, message],
-    );
-    const inquiryId = result.rows[0].id;
-    const notificationSent = await sendInquiryNotification({ id: inquiryId, name, email, message });
+    const inquiryId = randomUUID();
+    const [notificationSent, hubspotSynced] = await Promise.all([
+      sendInquiryNotification({ id: inquiryId, name, email, message }),
+      sendInquiryToHubSpot({ name, email, message }),
+    ]);
 
-    return NextResponse.json({ ok: true, notificationSent });
+    if (!notificationSent && !hubspotSynced) {
+      return NextResponse.json({ error: "Unable to send your inquiry right now. Please try again later." }, { status: 502 });
+    }
+    // Either successful destination retains the inquiry; do not prompt duplicate resubmissions.
+    return NextResponse.json({ ok: true, notificationSent, hubspotSynced });
   } catch {
-    return NextResponse.json({ error: "Unable to save your inquiry right now." }, { status: 500 });
+    return NextResponse.json({ error: "Unable to send your inquiry right now." }, { status: 500 });
   }
 }
