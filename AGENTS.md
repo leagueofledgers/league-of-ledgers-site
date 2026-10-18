@@ -10,6 +10,10 @@ This block is written and re-added by `next dev` — verify at `node_modules/nex
 
 # Development history
 
+## 2026-10-18 — HubSpot chat loader cache correction
+
+After installation, the owner confirmed that chat still did not appear in incognito. Browser DOM inspection found the HubSpot analytics and cookie-banner scripts but no `hubspot-messages-loader`. The account loader's previously cached response omitted the conversations embed, while a fresh query-string request included `https://js-na2.usemessages.com/conversations-embed.js`. Added a fixed `v=chat-20261018` query parameter to the existing account loader in `app/layout.tsx` so visitors request a fresh version after chat activation. The fixed version retains normal caching and does not bypass consent or load a duplicate embed directly. The HubSpot channel's saved navy accent remains `#0B3B5C`. Live widget verification follows publication.
+
 ## 2026-10-18 — HubSpot website chat loader
 
 The owner configured separate website and Facebook Messenger chatflows in HubSpot, but the website's source did not include the HubSpot loader required to display the floating web chat. Added the account-specific script from the owner's tracking-code screenshot (`https://js-na2.hs-scripts.com/247697012.js`, ID `hs-script-loader`) to `app/layout.tsx` using Next.js Script with `afterInteractive` loading. The shared layout loads it across the website without a new dependency or changes to existing analytics. The supplied website chatflow targets all pages; Messenger remains a separate HubSpot channel. This local integration still requires publication and a live widget check; chat visibility also depends on HubSpot publishing, availability, and visitor/browser settings. No HubSpot account settings or messages were changed.

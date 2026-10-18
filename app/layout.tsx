@@ -50,7 +50,7 @@ export default function RootLayout({ children }: Readonly<{ children: React.Reac
         <Analytics />
         <Script
           id="hs-script-loader"
-          src="https://js-na2.hs-scripts.com/247697012.js"
+          src="https://js-na2.hs-scripts.com/247697012.js?v=chat-20261018"
           strategy="afterInteractive"
           async
           defer
