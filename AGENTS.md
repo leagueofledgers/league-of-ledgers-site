@@ -10,6 +10,10 @@ This block is written and re-added by `next dev` — verify at `node_modules/nex
 
 # Development history
 
+## 2026-10-18 — Footer Facebook page link
+
+Connected the existing footer Facebook icon to the owner-supplied `https://www.facebook.com/leagueofledgers` page. In `components/landing-page.tsx`, the decorative span is now an accessible anchor that opens in a new tab with `noopener noreferrer` protection and an accessible label identifying the destination and new-tab behavior. The existing SVG and shared footer link styles provide the same appearance plus keyboard focus and hover feedback. No dependency or stylesheet change was needed. TypeScript checking and `git diff --check` passed during the publication follow-up. The owner authorized publication through the existing GitHub-to-Vercel integration; deployment verification is recorded below once complete.
+
 ## 2026-10-17 — Vercel Web Analytics integration
 
 Installed `@vercel/analytics` 2.0.1 and added its Next.js `Analytics` component to the shared root layout so page visits can be collected across the site. The component is rendered inside the root `<body>` after page content, following the Vercel integration guidance. This affects `package.json`, `package-lock.json`, `app/layout.tsx`, and this history file. The Vercel project must also have Web Analytics enabled in its dashboard before data will appear; that dashboard setting has not been verified here.

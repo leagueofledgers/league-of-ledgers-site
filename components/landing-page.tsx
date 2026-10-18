@@ -289,11 +289,11 @@ export default function LandingPage() {
               <path d="M6.5 34.5h35" fill="none" stroke="#fbbc04" strokeWidth="5" strokeLinecap="round" />
             </svg>
           </a>
-          <span className="footer-social-icon" role="img" aria-label="Facebook">
+          <a className="footer-social-icon" href="https://www.facebook.com/leagueofledgers" target="_blank" rel="noopener noreferrer" aria-label="League of Ledgers on Facebook (opens in a new tab)">
             <svg viewBox="0 0 48 48" aria-hidden="true" focusable="false">
               <path d="M27.3 43V25h6.1l.9-7h-7v-4.5c0-2 .6-3.3 3.5-3.3h3.8V4c-.7-.1-3-.3-5.8-.3-5.7 0-9.6 3.5-9.6 9.9V18h-6.4v7h6.4v18h8.1Z" fill="currentColor" />
             </svg>
-          </span>
+          </a>
           <span className="footer-social-icon" role="img" aria-label="Instagram">
             <svg viewBox="0 0 48 48" aria-hidden="true" focusable="false">
               <rect x="7" y="7" width="34" height="34" rx="10" fill="none" stroke="currentColor" strokeWidth="3.5" />
