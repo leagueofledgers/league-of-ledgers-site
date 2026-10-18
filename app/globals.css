@@ -13,6 +13,33 @@
   --content-width: 1200px;
 }
 
+.messenger-chat {
+  position: fixed;
+  right: max(20px, env(safe-area-inset-right));
+  bottom: max(20px, env(safe-area-inset-bottom));
+  z-index: 40;
+  display: inline-flex;
+  align-items: center;
+  gap: 10px;
+  min-height: 56px;
+  padding: 14px 20px;
+  border: 1px solid rgba(255, 255, 255, 0.25);
+  border-radius: 999px;
+  background: var(--navy);
+  color: #fff;
+  box-shadow: 0 6px 24px rgba(11, 30, 46, 0.24);
+  font-size: 14px;
+  font-weight: 700;
+}
+
+.messenger-chat svg { width: 25px; height: 25px; flex-shrink: 0; }
+.messenger-chat:hover { background: var(--deep-navy); }
+.messenger-chat:focus-visible { outline: 3px solid var(--orange); outline-offset: 4px; }
+
+@media (max-width: 480px) {
+  .messenger-chat { right: max(12px, env(safe-area-inset-right)); bottom: max(12px, env(safe-area-inset-bottom)); padding: 12px 16px; }
+}
+
 * {
   box-sizing: border-box;
 }

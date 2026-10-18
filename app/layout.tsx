@@ -47,7 +47,23 @@ export default function RootLayout({ children }: Readonly<{ children: React.Reac
     <html lang="en">
       <body>
         {children}
+        <a
+          className="messenger-chat"
+          href="https://m.me/1676529669250949?ref=x1w8bXD4RX7ZX"
+          target="_blank"
+          rel="noopener noreferrer"
+          aria-label="Chat on Messenger (opens in a new tab)"
+        >
+          <svg viewBox="0 0 24 24" aria-hidden="true" focusable="false">
+            <path fill="currentColor" d="M12 2C6.48 2 2 6.15 2 11.27c0 2.92 1.46 5.53 3.75 7.23V22l3.42-1.88c.9.25 1.85.39 2.83.39 5.52 0 10-4.15 10-9.24S17.52 2 12 2Z" />
+            <path fill="#0b3b5c" d="m6.5 14 4-4.25 2.75 2 4.25-2.5-4 4.25-2.75-2Z" />
+          </svg>
+          <span>Chat on Messenger</span>
+        </a>
         <Analytics />
+        <Script id="hubspot-chat-settings" strategy="beforeInteractive">
+          {`window.hsConversationsSettings = { loadImmediately: false };`}
+        </Script>
         <Script
           id="hs-script-loader"
           src="https://js-na2.hs-scripts.com/247697012.js?v=chat-20261018"
