@@ -10,9 +10,31 @@ This block is written and re-added by `next dev` — verify at `node_modules/nex
 
 # Development history
 
+## 2026-10-18 — HubSpot website chat loader
+
+The owner configured separate website and Facebook Messenger chatflows in HubSpot, but the website's source did not include the HubSpot loader required to display the floating web chat. Added the account-specific script from the owner's tracking-code screenshot (`https://js-na2.hs-scripts.com/247697012.js`, ID `hs-script-loader`) to `app/layout.tsx` using Next.js Script with `afterInteractive` loading. The shared layout loads it across the website without a new dependency or changes to existing analytics. The supplied website chatflow targets all pages; Messenger remains a separate HubSpot channel. This local integration still requires publication and a live widget check; chat visibility also depends on HubSpot publishing, availability, and visitor/browser settings. No HubSpot account settings or messages were changed.
+
+Validation for the HubSpot loader: `git diff --check` passed. Standalone TypeScript checking was attempted but the process exited with code 137 without diagnostics, so a successful type check is not claimed. Production rendering and message delivery remain unverified.
+
 ## 2026-10-18 — Footer Facebook page link
 
 Connected the existing footer Facebook icon to the owner-supplied `https://www.facebook.com/leagueofledgers` page. In `components/landing-page.tsx`, the decorative span is now an accessible anchor that opens in a new tab with `noopener noreferrer` protection and an accessible label identifying the destination and new-tab behavior. The existing SVG and shared footer link styles provide the same appearance plus keyboard focus and hover feedback. No dependency or stylesheet change was needed. TypeScript checking and `git diff --check` passed during the publication follow-up. Commit `825dd67` was pushed to `origin/main`, and its GitHub Vercel check reported “Deployment has completed” with success for production deployment `5m8hfuHB5YJms3mmWqr7UMoz4DXL`. The existing GitHub-to-Vercel release path was used without changing project settings.
+
+## 2026-10-17 — Three additional HVAC social posts
+
+Created three additional Facebook graphics covering unpaid invoices, overlooked job costs, and planning for slower months, accompanied by ready-to-use captions in the chat. All three follow the established navy, orange, and white website theme and reference the existing logo. The built-in image generator produced the selected square PNGs, saved in `output/branding/` as `hvac-unpaid-invoices-facebook-post.png`, `hvac-small-job-costs-facebook-post.png`, and `hvac-seasonal-cash-flow-facebook-post.png`. Each graphic was visually checked for wording and layout and its dimensions inspected. The posts contain general operational prompts without invented metrics or client outcomes. These remain standalone social assets; no website integration or Facebook publishing was performed.
+
+## 2026-10-17 — First HVAC Facebook post graphic
+
+Created a square graphic to accompany the owner’s first HVAC-focused Facebook post. The artwork uses the website’s navy, orange, and white theme, the existing logo as a reference, HVAC equipment imagery, and the headline “BOOKED SOLID. BUT PROFITABLE?” Supporting text encourages reviewing job costs, unpaid invoices, and margins without inventing results or financial metrics. The selected built-in image-generator output is saved at `output/branding/hvac-booked-solid-facebook-post.png`. Its text, branding, and layout were visually reviewed and image dimensions checked. This is a standalone social asset; no website code or Facebook content was published.
+
+## 2026-10-17 — Facebook Page cover artwork
+
+Created a wide Facebook cover for League of Ledgers using the existing logo and the website’s deep navy, navy, white, and orange visual theme. The first generated concept used serif typography and prominent gold decoration; the owner requested closer alignment with the website, so the selected revision uses clean sans-serif typography, orange accents, and gold mainly within the logo. The cover includes the existing bookkeeping headline, HVAC/plumbing/electrical positioning, website address, and decorative trade outlines without adding unsupported business claims. The selected PNG is saved at `output/branding/league-of-ledgers-facebook-cover.png`; its text and appearance were visually reviewed and its dimensions inspected. It was generated with the built-in image tool and is a separate social asset, with no website integration or Facebook upload performed.
+
+## 2026-10-17 — Filipino bookkeeper career graphic
+
+Created a square, social-ready bookkeeper career graphic inspired by the supplied job-alert reference. It uses the site's navy, orange, and gold palette, the existing League of Ledgers logo, and a generated portrait of a Filipino bookkeeper. The copy identifies the role, points to the canonical website, and reflects the site's HVAC, plumbing, and electrical focus without inventing salary, location, remote-work, or other employment terms that were not supplied. The 1200×1200 PNG and a self-contained editable SVG are saved as `public/bookkeeper-career-opportunity.png` and `public/bookkeeper-career-opportunity.svg`. The rendered PNG was visually reviewed and its dimensions were verified; no new dependency or page integration was needed.
 
 ## 2026-10-17 — Vercel Web Analytics integration
 

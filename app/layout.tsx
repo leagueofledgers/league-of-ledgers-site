@@ -1,4 +1,5 @@
 import type { Metadata } from "next";
+import Script from "next/script";
 import { Analytics } from "@vercel/analytics/next";
 import "./globals.css";
 
@@ -47,6 +48,13 @@ export default function RootLayout({ children }: Readonly<{ children: React.Reac
       <body>
         {children}
         <Analytics />
+        <Script
+          id="hs-script-loader"
+          src="https://js-na2.hs-scripts.com/247697012.js"
+          strategy="afterInteractive"
+          async
+          defer
+        />
       </body>
     </html>
   );
